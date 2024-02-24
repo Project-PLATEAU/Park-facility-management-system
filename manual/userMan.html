@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>操作マニュアル </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="操作マニュアル ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="操作マニュアル">操作マニュアル</h1>
+
+<h1 id="1-本書について">1 本書について</h1>
+<p>本書では、公園管理システム用CityGML変換ツール（以下「本変換ツール」という。）の操作手順について記載しています。</p>
+<h1 id="2-使い方">2 使い方</h1>
+<h2 id="2-1-fme-formの起動">2-1 FME Formの起動</h2>
+<p>本変換ツールは、FME FormのFME Workbench（ワークベンチ）で実行します。FME Workbenchを実行すると以下の画面が表示されます。</p>
+<p>①ワークスペースの読み込み
+本リポジトリのworkspace/以下に格納されたワークスペース（.fmw）ファイルを選択します。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ファイル名</th>
+<th>処理対象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>citygml_to_3dtiles_bldg.fmw</td>
+<td>3D都市モデル（CityGML）建築物モデル</td>
+</tr>
+<tr>
+<td>2</td>
+<td>citygml_to_3dtiles_brid.fmw</td>
+<td>3D都市モデル（CityGML）橋梁モデル</td>
+</tr>
+<tr>
+<td>3</td>
+<td>citygml_to_3dtiles_frn.fmw</td>
+<td>3D都市モデル（CityGML）都市設備モデル</td>
+</tr>
+<tr>
+<td>4</td>
+<td>citygml_to_3dtiles_wtr.fmw</td>
+<td>3D都市モデル（CityGML）水部モデル</td>
+</tr>
+<tr>
+<td>5</td>
+<td>citygml_to_mvt_area.fmw</td>
+<td>3D都市モデル（CityGML）区域モデル</td>
+</tr>
+<tr>
+<td>6</td>
+<td>citygml_to_mvt_trk.fmw</td>
+<td>3D都市モデル（CityGML）徒歩道モデル</td>
+</tr>
+<tr>
+<td>7</td>
+<td>obj_to_3dtiles_fence_gate_signboard.fmw</td>
+<td>3D都市モデル（CityGML）都市設備モデル、GISデータ、柵・門・看板の3Dモデル（OBJ）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>obj_to_3dtiles_solitary_tree.fmw</td>
+<td>単独木の3Dモデル（OBJ）、植物管理台帳、3D都市モデル（CityGML）植生モデル</td>
+</tr>
+<tr>
+<td>9</td>
+<td>photo_and_label_czml.fmw</td>
+<td>①〜⑧で作成したフットプリントGeoPackageデータ、写真</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../resources/userMan/tutorial_001.png" alt=""></p>
+<h2 id="2-2-ワークスペースの実行">2-2 ワークスペースの実行</h2>
+<p>① 実行</p>
+<p>・「Run」ボタンを押下するとファイル/フォルダ選択のダイアログが表示され、入力データ、出力先を指定するウィンドウが開きます。</p>
+<p><img src="../resources/userMan/tutorial_002.png" alt=""></p>
+<p>② 入力データ（ディレクトリ）の指定</p>
+<p>・変換元のデータ（CityGML、Obj, gdb）を指定します。このワークスペースばローカルに置かれたファイルを参照するように設定されていますが、リモートのAmazon Simple Storage Servideなどを参照する場合は、参照先を適宜変更してください。</p>
+<p>③ 出力先ディレクトリの指定1</p>
+<p>・3D TIles, MVT, CZMLの出力先を指定します。このワークスペースばローカルのディレクトリを参照するように設定されていますが、リモートのAmazon Simple Storage Servideなどを参照する場合は、参照先を適宜変更してください。</p>
+<p>④ 出力先ディレクトリの指定2</p>
+<p>・フットプリントデータ（GPKG）の出力先を指定します。このワークスペースばローカルのディレクトリを参照するように設定されていますが、リモートのAmazon Simple Storage Servideなどを参照する場合は、参照先を適宜変更してください。</p>
+<p>⑤ 実行</p>
+<p>・②〜④で入出力データの指定が完了したら、「Run」ボタンを押下して、ワークスペースを実行します。</p>
+<p><img src="../resources/userMan/tutorial_003.png" alt=""></p>
+<h1 id="3-出力データ">3 出力データ</h1>
+<p>各ワークフローを実行して出力されるデータは以下のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>ワークフロー名</th>
+<th>出力データ</th>
+<th>内容</th>
+<th>データ形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>citygml_to_3dtiles_bldg.fmw</td>
+<td>../output/3d-tiles/bldg/</td>
+<td>建築物モデルに含まれる公園施設の可視化用3D Tiles</td>
+<td>3D Tiles</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>建築物モデルに含まれる公園施設のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>citygml_to_3dtiles_brid.fmw</td>
+<td>../output/3d-tiles/brig/</td>
+<td>橋梁モデルに含まれる公園施設の可視化用3D Tiles</td>
+<td>3D Tiles</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>橋梁モデルに含まれる公園施設のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>citygml_to_3dtiles_frn.fmw</td>
+<td>../output/3d-tiles/frn/</td>
+<td>都市設備モデル（DM属性で記述されている柵・門・看板を除く）に含まれる公園施設の可視化用3D Tiles</td>
+<td>3D Tiles</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>都市設備モデル（DM属性で記述されている柵・門・看板を除く）に含まれる公園施設のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>citygml_to_3dtiles_wtr.fmw</td>
+<td>../output/3d-tiles/wtr/</td>
+<td>水部モデルに含まれる公園施設の可視化用3D Tiles</td>
+<td>3D Tiles</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>水部モデルに含まれる公園施設のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>citygml_to_mvt_area.fmw</td>
+<td>../output/mvt/area/</td>
+<td>区域モデルに含まれる公園施設の可視化用MVTデータ</td>
+<td>MVT</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>区域モデルに含まれる公園施設のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>citygml_to_mvt_trk.fmw</td>
+<td>../output/mvt/trk/</td>
+<td>徒歩道モデルに含まれる公園施設の可視化用MVTデータ</td>
+<td>MVT</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>徒歩道モデルに含まれる公園施設のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>obj_to_3dtiles_fence_gate_signboard.fmw</td>
+<td>../output/3d-tiles/fence-gate-signboard/</td>
+<td>柵・門・看板の可視化用3D Tiles</td>
+<td>3D Tiles</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>柵・門・看板のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>obj_to_3dtiles_solitary_tree.fmw</td>
+<td>../output/3d-tiles/solitary-tree/</td>
+<td>単独木の可視化用3D Tiles</td>
+<td>3D Tiles</td>
+</tr>
+<tr>
+<td></td>
+<td>../output/footprint.gpkg</td>
+<td>単独木のフットプリント</td>
+<td>GeoPackage</td>
+</tr>
+<tr>
+<td>photo_and_label_czml.fmw</td>
+<td>../output/czml/facility-labels.czml</td>
+<td>施設の写真、名称を示すCZML billboard label</td>
+<td>CZML</td>
+</tr>
+</tbody>
+</table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

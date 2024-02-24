@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>環境構築手順書 </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="環境構築手順書 ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="環境構築手順書">環境構築手順書</h1>
+
+<h1 id="1-本書について">1 本書について</h1>
+<p>本書では、公園管理システム用CityGML変換ツール（以下「変換ツール」という。）を実行するためのFME Formの利用環境構築手順について記載しています。本変換ツールの構成や仕様の詳細については以下も参考にしてください。</p>
+<p><a href="https://www.mlit.go.jp/plateau/file/libraries/doc/plateau_tech_doc_0030_ver01.pdf">技術検証レポート</a></p>
+<h1 id="2-動作環境">2 動作環境</h1>
+<p>本変換ツールの動作環境は以下のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>最小動作環境</th>
+<th>推奨動作環境</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Microsoft Windows 10 以上　または macOS 12 Monterey 以上</td>
+<td>同左</td>
+<td></td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Pentium 4 以上</td>
+<td>同左</td>
+<td></td>
+</tr>
+<tr>
+<td>メモリ</td>
+<td>8GB以上</td>
+<td>同左</td>
+<td></td>
+</tr>
+<tr>
+<td>ネットワーク</td>
+<td>【変換・作成】<br>インプットデータ（CityGMLなど）の格納先（S3）および出力先（S3）にアクセスできる環境が必要</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-インストール手順">3 インストール手順</h1>
+<p><a href="https://engage.safe.com/support/downloads/#official">こちら</a>からお使いの環境に対応した最新版のインストーラをダウンロードします。</p>
+<p>ダウンロード後、ファイルを実行すると、インストールが開始します。</p>
+<h1 id="4-ライセンス">4 ライセンス</h1>
+<p>FME Formは、商用のソフトウェアです。業務目的で利用するには、ライセンスの購入が必要です。新規ライセンスの購入については、Pacific Spatial Solutions 株式会社（Safe Software の公式パートナー）にお問い合わせください。</p>
+<p>製品ライセンスの購入を決定する前に評価版ライセンス（無償）を発行できます。
+評価版ライセンスによる試用をご希望の方は、次のウェブページに記載の要領でPacific Spatial Solutions株式会社にお申し込みください。</p>
+<p>FMEの無償（フリー）ライセンスについては<a href="https://fmesupport.com/2019/11/qa-fme-free-licenses">こちら</a>を参照してください。</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
