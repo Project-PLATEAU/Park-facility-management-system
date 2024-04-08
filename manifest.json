@@ -1,5 +1,5 @@
 {
-  "source_base_path": "D:/tmp_parkmanagement/ossdoc/markdown",
+  "source_base_path": "C:/Users/info/PSS Dropbox/All_Project/20220011_mlit_parkmanagement/02_data/08_OSSドキュメント/Park-facility-management-system/gh-pages/markdown",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -49,6 +49,46 @@
       "output": {
         ".html": {
           "relative_path": "manual/userMan.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/devMan/fme-flow-create-new-database-connection.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/devMan/fme-flow-create-new-database-connection.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/devMan/fme-flow-database-connections.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/devMan/fme-flow-database-connections.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/devMan/fme-flow-import-project.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/devMan/fme-flow-import-project.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "resources/devMan/fme-flow-manage-projects.png",
+      "output": {
+        "resource": {
+          "relative_path": "resources/devMan/fme-flow-manage-projects.png"
         }
       },
       "version": ""
