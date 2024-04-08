@@ -161,8 +161,10 @@ FME Flow ウェブインターフェースメニューの「Projects」セクシ
 <a href="https://github.com/Project-PLATEAU/Park-facility-management-system/src/">こちら</a>からコードをダウンロードします。
 展開したファイルを 3（2）で準備したウェブサーバのwebrootに配置します。</p>
 <p>（2）環境変数の設定
-下記の通り、環境変数を設定します。</p>
-<p><code>REACT_APP_TITLE=&lt;アプリタイトル&gt; REACT_APP_AGGRID_LICENSE=&lt;AgGridLicenseKey&gt; REACT_APP_SQL_ENDPOINT=&lt;SQLAPIエンドポイント&gt; REACT_APP_ENV_ENDPOINT=&lt;ENVエンドポイント&gt; REACT_APP_INIT_MAP_CENTER_LAT=&lt;地図初期経度&gt; REACT_APP_INIT_MAP_CENTER_LNG=&lt;地図初期緯度&gt; REACT_APP_CARTO_SSL=&lt;CARTODBにSSLで接続するか&gt; REACT_APP_CARTO_USERNAME=&lt;CARTODBのユーザ名&gt; REACT_APP_CARTO_DOMAIN=&lt;CARTODBのドメイン&gt; REACT_APP_CARTO_SERVER_URL=&lt;CARTODBのサーバURL&gt; REACT_APP_CARTO_ENDPOINT=&lt;CARTODB APIエンドポイント&gt; REACT_APP_CARTO_SQLAPI_PREFIX=&lt;SQLAPI接続子&gt; REACT_APP_CARTO_API_KEY=&lt;CARTODB ReadのAPIKEY&gt; REACT_APP_IMAGE_URL=&lt;画像のBASEDURL&gt; REACT_APP_FRAME_IMAGE_URL=&lt;フレーム画像のBASEURL&gt; REACT_APP_MAP_LAYER_DOURODAICHO_URL=&lt;背景図レイヤーのURL&gt; REACT_APP_MAP_LAYER_GAIKU_URL=&lt;街区レイヤーのURL&gt; REACT_APP_FIREBASE_API_KEY=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_AUTH_DOMAIN=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_PROJECT_ID=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_STORAGE_BUCKET=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_MESSAGING_SENDER_ID=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_APP_ID=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_MEASUREMENT_ID=&lt;FIREBASE情報&gt; REACT_APP_TABLE_TREE_MASTER=&lt;樹木マスターテーブル名&gt; REACT_APP_TABLE_TREE_EDITED=&lt;樹木編集テーブル&gt; REACT_APP_TABLE_COMMENT=&lt;コメントテーブル&gt; REACT_APP_TABLE_USER=&lt;ユーザテーブル&gt; REACT_APP_TABLE_UGREEN=&lt;U-Green様データテーブル&gt; REACT_APP_TABLE_TREE_VIEW=&lt;樹木ビュー&gt; REACT_APP_TABLE_COMMENT_VIEW=&lt;コメントビュー&gt; REACT_APP_TABLE_TREE_CHANGE_VIEW=&lt;変更履歴テーブル&gt;</code></p>
+下記の通り、環境変数を設定します。.envファイルとしてプロジェクトルートに配置してください。</p>
+<p><code>REACT_APP_API_ENDPOINT=&lt;APIのURL&gt;</code>
+<br>
+<code>REACT_APP_MEDIA_ENDPOINT=&lt;画像や音声の保存パス&gt;</code></p>
 <h1 id="5-初期データの投入">5 初期データの投入</h1>
 <p>本システムの稼働に必要なデータを投入します。</p>
 <p>（1）初期データの登録：PostgreSQLへの格納
