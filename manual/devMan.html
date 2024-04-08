@@ -100,6 +100,43 @@
 </tr>
 </tbody>
 </table>
+<p>公園施設CityGMLを本システムに投入するためのFMEワークスペースの実行環境は下記のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>最小動作環境</th>
+<th>推奨動作環境</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Microsoft Windows 10 以上　または macOS 12 Monterey 以上</td>
+<td>同左</td>
+<td></td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Pentium 4 以上</td>
+<td>同左</td>
+<td></td>
+</tr>
+<tr>
+<td>メモリ</td>
+<td>8GB以上</td>
+<td>同左</td>
+<td></td>
+</tr>
+<tr>
+<td>ネットワーク</td>
+<td>【変換・作成】<br>変換したデータ（3DTiles等）の格納先（AWS S3、PostgreSQL）にアクセスできる環境が必要</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h1 id="3-事前準備">3 事前準備</h1>
 <p>本システムで利用する下記の商用、オープンソースのソフトウェアおよびデータベースを準備します。</p>
 <p>（1）データベースの準備
@@ -108,7 +145,15 @@
 <a href="https://httpd.apache.org/">こちら</a>を利用してウェブサーバを起動します。</p>
 <p>（3）FME Flowの準備
 <a href="https://safe.com/">こちら</a>を利用してFME Flowを起動します。
-尚、FME Flowは、商用のソフトウェアです。業務目的で利用するには、ライセンスの購入が必要です。新規ライセンスの購入については、Pacific Spatial Solutions 株式会社（Safe Software の公式パートナー）にお問い合わせください。</p>
+尚、FME Flowは、商用のソフトウェアです。業務目的で利用するには、ライセンスの購入が必要です。新規ライセンスの購入については、Pacific Spatial Solutions 株式会社（Safe Software の公式パートナー）にお問い合わせください。
+FME Flowの起動ができたら、以下の手順で本システムを稼働させるためのセットアップをしてください。</p>
+<p>・データベースコネクションの設定
+（1）で準備したPostgreSQLへの接続情報をFME Flowのウェブインターフェースメニューの「Connections &amp; Parameters」セクションで、下記の通り設定してください。
+<img src="../resources/devMan/fme-flow-create-new-database-connection.png" alt="Database Connections">
+次に本システム用の<a href="https://github.com/Project-PLATEAU/Park-facility-management-system/blob/main/workspaces/plateau-park-management-db-update1.0.0.fsproject">FME Flowのプロジェクトファイル</a>を以下の手順でFME Flowにインポートしてください。
+FME Flow ウェブインターフェースメニューの「Projects」セクションの「Manage Projects」で [Import] ボタンをクリックするとアップロードできます。
+<img src="../resources/devMan/fme-flow-manage-projects.png" alt="Database Connections">
+<img src="../resources/devMan/fme-flow-import-project.png" alt="Database Connections"></p>
 <p>（4）Amazon S3の準備
 <a href="https://aws.amazon.com/jp/s3/">こちら</a>からAmazon S3のアカウントを取得し、本システムで使用するためのバケットを作成します。一つの公園を対象とする場合はstandardで十分ですが、ご利用になるデータサイズに応じたサイズのバケットを選択してください。</p>
 <h1 id="4-インストール手順">4 インストール手順</h1>
@@ -118,6 +163,89 @@
 <p>（2）環境変数の設定
 下記の通り、環境変数を設定します。</p>
 <p><code>REACT_APP_TITLE=&lt;アプリタイトル&gt; REACT_APP_AGGRID_LICENSE=&lt;AgGridLicenseKey&gt; REACT_APP_SQL_ENDPOINT=&lt;SQLAPIエンドポイント&gt; REACT_APP_ENV_ENDPOINT=&lt;ENVエンドポイント&gt; REACT_APP_INIT_MAP_CENTER_LAT=&lt;地図初期経度&gt; REACT_APP_INIT_MAP_CENTER_LNG=&lt;地図初期緯度&gt; REACT_APP_CARTO_SSL=&lt;CARTODBにSSLで接続するか&gt; REACT_APP_CARTO_USERNAME=&lt;CARTODBのユーザ名&gt; REACT_APP_CARTO_DOMAIN=&lt;CARTODBのドメイン&gt; REACT_APP_CARTO_SERVER_URL=&lt;CARTODBのサーバURL&gt; REACT_APP_CARTO_ENDPOINT=&lt;CARTODB APIエンドポイント&gt; REACT_APP_CARTO_SQLAPI_PREFIX=&lt;SQLAPI接続子&gt; REACT_APP_CARTO_API_KEY=&lt;CARTODB ReadのAPIKEY&gt; REACT_APP_IMAGE_URL=&lt;画像のBASEDURL&gt; REACT_APP_FRAME_IMAGE_URL=&lt;フレーム画像のBASEURL&gt; REACT_APP_MAP_LAYER_DOURODAICHO_URL=&lt;背景図レイヤーのURL&gt; REACT_APP_MAP_LAYER_GAIKU_URL=&lt;街区レイヤーのURL&gt; REACT_APP_FIREBASE_API_KEY=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_AUTH_DOMAIN=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_PROJECT_ID=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_STORAGE_BUCKET=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_MESSAGING_SENDER_ID=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_APP_ID=&lt;FIREBASE情報&gt; REACT_APP_FIREBASE_MEASUREMENT_ID=&lt;FIREBASE情報&gt; REACT_APP_TABLE_TREE_MASTER=&lt;樹木マスターテーブル名&gt; REACT_APP_TABLE_TREE_EDITED=&lt;樹木編集テーブル&gt; REACT_APP_TABLE_COMMENT=&lt;コメントテーブル&gt; REACT_APP_TABLE_USER=&lt;ユーザテーブル&gt; REACT_APP_TABLE_UGREEN=&lt;U-Green様データテーブル&gt; REACT_APP_TABLE_TREE_VIEW=&lt;樹木ビュー&gt; REACT_APP_TABLE_COMMENT_VIEW=&lt;コメントビュー&gt; REACT_APP_TABLE_TREE_CHANGE_VIEW=&lt;変更履歴テーブル&gt;</code></p>
+<h1 id="5-初期データの投入">5 初期データの投入</h1>
+<p>本システムの稼働に必要なデータを投入します。</p>
+<p>（1）初期データの登録：PostgreSQLへの格納
+・公園施設CityGMLデータ
+<a href="https://github.com/Project-PLATEAU/Park-facility-management-system/blob/main/workspaces/fn001_CityGML%E5%8F%97%E5%85%A5%E5%87%A6%E7%90%86.fmw">こちら</a>のワークスペースをFME Formで実行してください。実行の際にはPostgreSQLへの接続情報を求めるプロンプトが表示されますので、これに従って、入力してください。入力データはPLATEAUの3D都市モデル標準製品仕様書の規則に従ったCityGML形式のデータとします。</p>
+<p>・樹木台帳データ
+属性データの更新に</p>
+<table>
+<thead>
+<tr>
+<th>フィールド名</th>
+<th>データ型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公園コード</td>
+<td>text</td>
+</tr>
+<tr>
+<td>公園名</td>
+<td>text</td>
+</tr>
+<tr>
+<td>公園種別</td>
+<td>text</td>
+</tr>
+<tr>
+<td>施設コード</td>
+<td>text</td>
+</tr>
+<tr>
+<td>公園施設種類</td>
+<td>text</td>
+</tr>
+<tr>
+<td>公園施設名</td>
+<td>text</td>
+</tr>
+<tr>
+<td>公園施設名（任意）</td>
+<td>text</td>
+</tr>
+<tr>
+<td>種名</td>
+<td>text</td>
+</tr>
+<tr>
+<td>幹周</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>樹高</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>本数</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>本数単位</td>
+<td>text</td>
+</tr>
+<tr>
+<td>備考</td>
+<td>text</td>
+</tr>
+<tr>
+<td>経度</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>緯度</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>標高</td>
+<td>numeric</td>
+</tr>
+</tbody>
+</table>
+<p>（2）表示用データの登録：Amazon S3への格納
+（1）でPostgreSQLに格納した公園施設CityGMLテーブルと公共測量成果の精度を満たさない地物を生成するためのデータ（Shapeファイル、OBJファイル、CSVファイル）を入力データとして、<a href="https://github.com/Project-PLATEAU/Park-facility-management-system/blob/main/workspaces/fn002_%E5%8F%AF%E8%A6%96%E5%8C%96%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF%E5%A4%89%E6%8F%9B%E5%87%A6%E7%90%86.fmw">こちら</a>のワークスペースをFME Formで実行してください。実行の際には、以下の入力データの指定と。PostgreSQLおよびS3への接続情報をそれぞれプロンプトに従って入力してください。</p>
 
 </article>
           </div>
