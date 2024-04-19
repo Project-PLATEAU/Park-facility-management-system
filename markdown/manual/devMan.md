@@ -61,9 +61,10 @@ FME Flowの起動ができたら、以下の手順で本システムを稼働さ
 （2）環境変数の設定
 下記の通り、環境変数を設定します。.envファイルとしてプロジェクトルートに配置してください。
 
-`REACT_APP_API_ENDPOINT=<APIのURL>`
-<br>
-`REACT_APP_MEDIA_ENDPOINT=<画像や音声の保存パス>`
+`REACT_APP_API_ENDPOINT=<APIのURL>`<br>
+`REACT_APP_MEDIA_ENDPOINT=<画像や音声の保存パス>`<br>
+`REACT_APP_AG_GRID_LICENSE_KEY=<AG Gridのライセンスキー>`<br>
+`REACT_APP_3DTILES_ENDPOINT=<3DTilesの保存パス>`
 
 
 # 5 初期データの投入
