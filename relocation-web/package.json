@@ -1,0 +1,56 @@
+{
+  "name": "facility-pos-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "ag-grid-enterprise": "^32.3.3",
+    "ag-grid-react": "^32.3.3",
+    "axios": "^1.7.7",
+    "cesium": "^1.123.1",
+    "dayjs": "^1.11.13",
+    "lodash": "^4.17.21",
+    "ncp": "^2.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
+    "rimraf": "^6.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "build-develop": "dotenv -e .env.development react-scripts build",
+    "build-staging": "dotenv -e .env.staging react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postinstall": "rimraf ./src/cesium/* && ncp ./node_modules/cesium/Build/Cesium ./src/cesium && ncp ./node_modules/cesium/Build/Cesium ./public/cesium"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

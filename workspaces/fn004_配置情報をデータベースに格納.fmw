@@ -1,0 +1,1277 @@
+#! <?xml version="1.0" encoding="UTF-8" ?>
+#! <WORKSPACE
+#    Command line to run this workspace:
+#        /Library/FME/2024.2/fme /Users/hamaokariho/Desktop/20240507公園DX/20250217OSS用ワークベンチ/施設配置シミュレーション_ロケーション履歴記録20250217.fmw
+#          --REQUEST_MESSAGE_JSON "<opencurly><lf><tab><quote>model_url<quote>:<space><quote>http:<solidus><solidus>vrobject.s3.amazonaws.com<solidus>obj<solidus>YUG0001_1.zip<quote><comma><lf><tab><quote>obj_height<quote>:<space>1<comma><lf><tab><quote>obj_id<quote>:<space>12345<comma><lf><tab><quote>obj_lat<quote>:<space>37.428737<comma><lf><tab><quote>obj_lon<quote>:<space>138.747797<comma><lf><tab><quote>obj_name<quote>:<space><quote>test<quote><comma><lf><tab><quote>obj_rotation<quote>:<space>30<comma><lf><tab><quote>request_datetime<quote>:<space><quote>2024-11-22<space>16:28:32+09:00<quote><comma><lf><tab><quote>request_id<quote>:<space><quote>000<quote><comma><lf><tab><quote>source_format<quote>:<space><quote>obj<quote><lf><closecurly><lf>"
+#          --SUCCESS_MESSAGE_JSON "<opencurly><lf><space><space><space><space><quote>fme_job_id<quote>:<space><quote><quote><comma><lf><space><space><space><space><quote>fme_result<quote>:<space>true<comma><lf><space><space><space><space><quote>obj_elevation<quote>:<space><quote>115.869<quote><comma><lf><space><space><space><space><quote>obj_type<quote>:<space>0<comma><lf><space><space><space><space><quote>removed<quote>:<space>false<comma><lf><space><space><space><space><quote>tileset_url<quote>:<space><quote>https:<solidus><solidus>s3.ap-northeast-1.amazonaws.com<solidus>vrobject<solidus>3d-tiles<solidus>test<solidus>tileset.json<quote><lf><closecurly><lf>"
+#          --DestDataset_POSTGRES "PostgreSQL_echigo_simulation"
+#          --FME_LAUNCH_VIEWER_APP "YES"
+#    
+#!   A0_PREVIEW_IMAGE="data:image/png;base64,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"
+#!   ARCGIS_COMPATIBILITY="ARCGIS_AUTO"
+#!   ATTR_TYPE_ENCODING="SDF"
+#!   BEGIN_PYTHON=""
+#!   BEGIN_TCL=""
+#!   CATEGORY=""
+#!   DESCRIPTION=""
+#!   DESTINATION="NONE"
+#!   DESTINATION_ROUTING_FILE=""
+#!   DOC_EXTENTS="5843.62 611.003"
+#!   DOC_TOP_LEFT="-711.007 -530.003"
+#!   END_PYTHON=""
+#!   END_TCL=""
+#!   EXPLICIT_BOOKMARK_ORDER="false"
+#!   FME_BUILD_NUM="24820"
+#!   FME_BULK_MODE_THRESHOLD="2000"
+#!   FME_DOCUMENT_GUID="549d59a1-a939-4fff-bbfd-e25de493ebd1"
+#!   FME_DOCUMENT_PRIORGUID="8e5cd2fb-a0bc-4630-a061-ff48f3e9d0ef,8f0541a8-734a-477d-8083-22f86e08a0dc,53bfcb15-5a61-47ee-a8d8-b8b728e5b2e2,d5dacfd2-4e2e-402a-b1c4-11510437c0b8,8a3345af-cf5c-479d-bcbb-183b9da07041"
+#!   FME_GEOMETRY_HANDLING="Enhanced"
+#!   FME_IMPLICIT_CSMAP_REPROJECTION_MODE="Auto"
+#!   FME_NAMES_ENCODING="UTF-8"
+#!   FME_REPROJECTION_ENGINE="FME"
+#!   FME_SERVER_SERVICES=""
+#!   FME_STROKE_MAX_DEVIATION="0"
+#!   HISTORY=""
+#!   IGNORE_READER_FAILURE="No"
+#!   LAST_SAVE_BUILD="FME(R) 2024.2.2.0 (20250114 - Build 24820 - macosx-aarch64)"
+#!   LAST_SAVE_DATE="2025-02-17T17:07:57"
+#!   LOG_FILE=""
+#!   LOG_MAX_RECORDED_FEATURES="200"
+#!   MARKDOWN_DESCRIPTION=""
+#!   MARKDOWN_USAGE=""
+#!   MAX_LOG_FEATURES="200"
+#!   MULTI_WRITER_DATASET_ORDER="BY_ID"
+#!   PASSWORD=""
+#!   PYTHON_COMPATIBILITY="312"
+#!   REDIRECT_TERMINATORS="NONE"
+#!   SAVE_ON_PROMPT_AND_RUN="Yes"
+#!   SHOW_ANNOTATIONS="true"
+#!   SHOW_INFO_NODES="true"
+#!   SOURCE="NONE"
+#!   SOURCE_ROUTING_FILE=""
+#!   TERMINATE_REJECTED="YES"
+#!   TITLE=""
+#!   USAGE=""
+#!   USE_MARKDOWN=""
+#!   VIEW_POSITION="-1500.02 867.4"
+#!   WARN_INVALID_XFORM_PARAM="Yes"
+#!   WORKSPACE_VERSION="1"
+#!   ZOOM_SCALE="46"
+#! >
+#! <DATASETS>
+#! <DATASET
+#!   IS_SOURCE="false"
+#!   ROLE="WRITER"
+#!   FORMAT="POSTGRES"
+#!   DATASET="$(DestDataset_POSTGRES)"
+#!   KEYWORD="POSTGRES_1"
+#!   MULTI_GEOM_ALLOWED="true"
+#!   ATTR_MAX_LENGTH="63"
+#!   ATTR_CASE="LOWER"
+#!   ALLOWED_FEAT_TYPES=""
+#!   WRITE_DEFS="true"
+#!   DEFLINE_TEMPLATE="postgres_type {FME_GEN_GEOMETRY} postgres_sql_key_columns &quot;&quot; postgres_drop_table &quot;&quot; postgres_truncate_table &quot;&quot; postgres_mode &quot;&quot; fme_feature_operation INSERT fme_table_handling CREATE_IF_MISSING fme_selection_method MATCH_COLUMNS fme_match_columns &quot;&quot; fme_where_builder_clause &quot;&quot; postgres_create_with_oids NO postgres_vacuum_analyze NO postgres_allow_serial_writing NO"
+#!   DEFLINE_ATTRS="true"
+#!   EXPOSABLE_ATTRS="fme_basename char(50) fme_color char(50) fme_dataset char(50) fme_db_operation char(8) fme_feature_type char(50) fme_fill_color char(50) fme_geometry char(50) fme_primary_axis float8 fme_rotation float8 fme_secondary_axis float8 fme_start_angle float8 fme_sweep_angle float8 fme_text_size float8 fme_text_string char(50) fme_type char(50) postgres_type char(50)"
+#!   DEFLINE_PARMS="&quot;GUI OPTIONAL NAMEDGROUP fme_configuration_group fme_configuration_common_group%fme_spatial_group%fme_advanced_group%oracle_advanced_group Table&quot; &quot;&quot; &quot;GUI OPTIONAL NAMEDGROUP fme_configuration_common_group fme_feature_operation%fme_table_handling%mie_pack%oracle_model%fme_update_geometry%fme_selection_group%fme_table_creation_group General&quot; &quot;&quot; &quot;GUI ACTIVECHOICE_LOOKUP fme_feature_operation Insert,INSERT,fme_update_geometry,fme_selection_group,mie_pack%Update,UPDATE,++fme_table_handling+USE_EXISTING,++fme_selection_group+FME_DISCLOSURE_OPEN%Upsert,UPSERT,fme_where_builder_clause,++fme_table_handling+USE_EXISTING,++fme_selection_group+FME_DISCLOSURE_OPEN%Delete,DELETE,++fme_table_handling+USE_EXISTING,fme_update_geometry,++fme_selection_group+FME_DISCLOSURE_OPEN,fme_spatial_group,fme_advanced_group,oracle_sequenced_cols%&lt;at&gt;Value&lt;openparen&gt;fme_db_operation&lt;closeparen&gt;,MULTIPLE,++fme_table_handling+USE_EXISTING,++fme_selection_group+FME_DISCLOSURE_OPEN Feature Operation&quot; INSERT &quot;GUI ACTIVECHOICE_LOOKUP fme_table_handling Use&lt;space&gt;Existing,USE_EXISTING,fme_table_creation_group%Create&lt;space&gt;If&lt;space&gt;Needed,CREATE_IF_MISSING%Drop&lt;space&gt;and&lt;space&gt;Create,DROP_CREATE%Truncate&lt;space&gt;Existing,TRUNCATE_EXISTING,fme_table_creation_group Table Handling&quot; CREATE_IF_MISSING &quot;GUI OPTIONAL DISCLOSUREGROUP fme_selection_group fme_selection_method Row Selection&quot; &quot;&quot; &quot;GUI OPTIONAL WHOLE_LINE RADIOPARAMETERGROUP fme_selection_method fme_match_columns,MATCH_COLUMNS%fme_where_builder_clause,BUILDER Row Selection Method&quot; MATCH_COLUMNS &quot;GUI WHOLE_LINE ATTRLIST_COMMAS fme_match_columns \&quot; \&quot; Match Columns&quot; &quot;&quot; &quot;GUI WHOLE_LINE TEXT_EDIT_SQL_CFG_OR_ATTR fme_where_builder_clause MODE,WHERE WHERE Clause&quot; &quot;&quot; &quot;GUI OPTIONAL DISCLOSUREGROUP fme_table_creation_group postgres_create_with_oids Table Creation&quot; &quot;&quot; &quot;GUI CHOICE_ENCODED postgres_create_with_oids YES&lt;space&gt;(Ignored&lt;space&gt;in&lt;space&gt;PostgreSQL&lt;space&gt;12&lt;space&gt;or&lt;space&gt;higher)%NO Create With OIDs&quot; NO &quot;GUI OPTIONAL DISCLOSUREGROUP fme_advanced_group postgres_vacuum_analyze%postgres_allow_serial_writing Advanced&quot; &quot;&quot; &quot;GUI CHOICE postgres_vacuum_analyze YES%NO Vacuum Analyze Table&quot; NO &quot;GUI CHOICE postgres_allow_serial_writing YES%NO Allow Serial Column Writing&quot; NO "
+#!   ATTR_INDEX_TYPES="BTree RTree Hash PrimaryKey Unique"
+#!   ATTR_NAME_INVALID_CHARS=". %-#[]&quot;()!?*&apos;&amp;+\/"
+#!   SUPPORTS_FEATURE_TYPE_FANOUT="true"
+#!   ENABLED="true"
+#!   DYNAMIC_FEATURE_TYPES_LIST_ON_MERGE="true"
+#!   DATASET_TYPE="DATABASE"
+#!   FTTR_TYPE=""
+#!   GENERATE_FME_BUILD_NUM="24612"
+#!   COORDSYS=""
+#! >
+#! <METAFILE_PARAMETER
+#!   NAME="ADVANCED_PARMS"
+#!   VALUE="POSTGRES_IN_FEATURES_PER_FETCH POSTGRES_IN_BEGIN_SQL POSTGRES_IN_END_SQL POSTGRES_OUT_BULK_COPY POSTGRES_OUT_MISSING_ATTRIBUTE_BEHAVIOUR POSTGRES_OUT_START_TRANSACTION POSTGRES_OUT_TRANSACTION_INTERVAL POSTGRES_OUT_BEGIN_SQL POSTGRES_OUT_END_SQL"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="ATTRIBUTE_READING"
+#!   VALUE="DEFLINE_ATTRS"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="ATTRIBUTE_READING_HISTORIC"
+#!   VALUE="ALL"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="FEATURE_TYPE_DEFAULT_NAME"
+#!   VALUE="Table1"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="FEATURE_TYPE_NAME"
+#!   VALUE="Table"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="NETWORK_AUTHENTICATION"
+#!   VALUE="NO"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="NETWORK_PROXY"
+#!   VALUE="NO"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="PARAMS_TO_NOT_PROPAGATE_ON_INSPECT"
+#!   VALUE="BEGIN_SQL END_SQL"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="SUPPORTS_SCHEMA_IN_FEATURE_TYPE_NAME"
+#!   VALUE="YES"
+#! />
+#! </DATASET>
+#! </DATASETS>
+#! <DATA_TYPES>
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="bool"
+#!   FME_TYPE="fme_boolean"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_char(width)"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="varchar(width)"
+#!   FME_TYPE="fme_varchar(width)"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="varchar"
+#!   FME_TYPE="fme_buffer"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="text"
+#!   FME_TYPE="fme_buffer"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="xml"
+#!   FME_TYPE="fme_xml"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="json"
+#!   FME_TYPE="fme_json"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="jsonb"
+#!   FME_TYPE="fme_json"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="bytea"
+#!   FME_TYPE="fme_binarybuffer"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="bytea"
+#!   FME_TYPE="fme_varbinary(width)"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="bytea"
+#!   FME_TYPE="fme_binary(width)"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="int2"
+#!   FME_TYPE="fme_int16"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="int2"
+#!   FME_TYPE="fme_int8"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="int2"
+#!   FME_TYPE="fme_uint8"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="int4"
+#!   FME_TYPE="fme_int32"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="int4"
+#!   FME_TYPE="fme_uint16"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="int8"
+#!   FME_TYPE="fme_int64"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="int8"
+#!   FME_TYPE="fme_uint32"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="numeric(width,decimal)"
+#!   FME_TYPE="fme_decimal(width,decimal)"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="numeric(20,0)"
+#!   FME_TYPE="fme_uint64"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="oid"
+#!   FME_TYPE="fme_uint32"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="serial"
+#!   FME_TYPE="fme_int32"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="float4"
+#!   FME_TYPE="fme_real32"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="money"
+#!   FME_TYPE="fme_real32"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="float8"
+#!   FME_TYPE="fme_real64"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="date"
+#!   FME_TYPE="fme_date"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="time"
+#!   FME_TYPE="fme_time"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="timetz"
+#!   FME_TYPE="fme_time"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="timestamp"
+#!   FME_TYPE="fme_datetime"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="timestamptz"
+#!   FME_TYPE="fme_datetime"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="uuid"
+#!   FME_TYPE="fme_buffer"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="bit(width)"
+#!   FME_TYPE="fme_char(width)"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="varbit"
+#!   FME_TYPE="fme_buffer"
+#!   FORMAT="POSTGRES"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="varbit(width)"
+#!   FME_TYPE="fme_varchar(width)"
+#!   FORMAT="POSTGRES"
+#! />
+#! </DATA_TYPES>
+#! <GEOM_TYPES>
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_no_geom"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_point"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_line"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_area"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_rectangle"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_rounded_rectangle"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_text"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_ellipse"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_arc"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_collection"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_raster"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_surface"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_solid"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_point_cloud"
+#!   FORMAT="POSTGRES"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="postgres_none"
+#!   FME_TYPE="fme_voxel_grid"
+#!   FORMAT="POSTGRES"
+#! />
+#! </GEOM_TYPES>
+#! <FEATURE_TYPES>
+#! <FEATURE_TYPE
+#!   IS_SOURCE="false"
+#!   NODE_NAME="relocation_status"
+#!   FEATURE_TYPE_NAME=""
+#!   FEATURE_TYPE_NAME_QUALIFIER="echigo"
+#!   IS_EDITABLE="true"
+#!   IDENTIFIER="18"
+#!   FEAT_GEOMTYPE="All"
+#!   POSITION="4457.0455704557044 -255.00255002550026"
+#!   BOUNDING_RECT="4457.0455704557044 -255.00255002550026 675.5625 65"
+#!   ORDER="500000000000089"
+#!   COLLAPSED="false"
+#!   KEYWORD="POSTGRES_1"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   SCHEMA_ATTRIBUTE_SOURCE="1"
+#! >
+#!     <FEAT_ATTRIBUTE ATTR_NAME="uuid" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="created_at" ATTR_TYPE="timestamp" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="deleted_at" ATTR_TYPE="timestamp" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="type" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="url" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="format" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="alias" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="name" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="object_height" ATTR_TYPE="float8" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="object_scale" ATTR_TYPE="float8" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="result" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="status" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="error" ATTR_TYPE="text" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <DEFLINE_PARM PARM_NAME="fme_advanced_group" PARM_VALUE="FME_DISCLOSURE_OPEN"/>
+#!     <DEFLINE_PARM PARM_NAME="fme_configuration_common_group" PARM_VALUE=""/>
+#!     <DEFLINE_PARM PARM_NAME="fme_configuration_group" PARM_VALUE=""/>
+#!     <DEFLINE_PARM PARM_NAME="fme_feature_operation" PARM_VALUE="INSERT"/>
+#!     <DEFLINE_PARM PARM_NAME="fme_match_columns" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <DEFLINE_PARM PARM_NAME="fme_selection_group" PARM_VALUE=""/>
+#!     <DEFLINE_PARM PARM_NAME="fme_selection_method" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <DEFLINE_PARM PARM_NAME="fme_table_creation_group" PARM_VALUE=""/>
+#!     <DEFLINE_PARM PARM_NAME="fme_table_handling" PARM_VALUE="CREATE_IF_MISSING"/>
+#!     <DEFLINE_PARM PARM_NAME="fme_where_builder_clause" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <DEFLINE_PARM PARM_NAME="postgres_allow_serial_writing" PARM_VALUE="YES"/>
+#!     <DEFLINE_PARM PARM_NAME="postgres_create_with_oids" PARM_VALUE="NO"/>
+#!     <DEFLINE_PARM PARM_NAME="postgres_vacuum_analyze" PARM_VALUE="NO"/>
+#! </FEATURE_TYPE>
+#! </FEATURE_TYPES>
+#! <FMESERVER>
+#! <SERVICES>
+#! <SERVICE
+#!   NAME="fmejobsubmitter"
+#! >
+#! <PROPERTIES>
+#! <PROPERTY
+#!   NAME="ADVANCED"
+#!   VALUE=""
+#! />
+#! <PROPERTY
+#!   NAME="FAILURE_TOPICS"
+#!   VALUE=""
+#! />
+#! <PROPERTY
+#!   NAME="HTTP_DATASET"
+#!   VALUE=""
+#! />
+#! <PROPERTY
+#!   NAME="NOTIFICATION_WRITER"
+#!   VALUE=""
+#! />
+#! <PROPERTY
+#!   NAME="SUCCESS_TOPICS"
+#!   VALUE=""
+#! />
+#! </PROPERTIES>
+#! </SERVICE>
+#! </SERVICES>
+#! <REPOSITORY
+#!   NAME="hamaokatest"
+#! />
+#! <ITEM
+#!   NAME="simulation_jsonmerge20241122.fmw"
+#! />
+#! <MODIFICATIONS>
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SERVER_DEST_DIR"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_BACKUP"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_DASHBOARD"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_DATA"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_ENGINE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_LOG"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_SYSTEM"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_TEMP"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_TOPIC_MESSAGE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":WBDoc:DESTINATION_ROUTING_FILE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":WBDoc:LOG_FILE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":WBDoc:SOURCE_ROUTING_FILE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":WBParameterNode_19:FILEPATH_OR_URL"
+#!   VALUE="&lt;Unused&gt;"
+#! />
+#! <MODIFICATION
+#!   UID=":WBParameterNode_7:ROOT_QUERY_FILE"
+#!   VALUE="&lt;Unused&gt;"
+#! />
+#! </MODIFICATIONS>
+#! <CONNECTIONS>
+#! <CONNECTION
+#!   NAME="PostgreSQL_echigo_simulation"
+#!   TYPE="DATABASE"
+#!   FAMILY="PostgreSQL"
+#!   USAGE="PUBLISHED"
+#! />
+#! </CONNECTIONS>
+#! </FMESERVER>
+#! <GLOBAL_PARAMETERS>
+#! <GLOBAL_PARAMETER
+#!   GUI_LINE="GUI TEXT_EDIT_OR_ATTR REQUEST_MESSAGE_JSON FME_SYNTAX%JSON%FME_INCLUDEBROWSE%NO%FME_INLINE%NO Request Message JSON"
+#!   DEFAULT_VALUE="&lt;opencurly&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;model_url&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;http:&lt;solidus&gt;&lt;solidus&gt;vrobject.s3.amazonaws.com&lt;solidus&gt;obj&lt;solidus&gt;YUG0001_1.zip&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_height&lt;quote&gt;:&lt;space&gt;1&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_id&lt;quote&gt;:&lt;space&gt;12345&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_lat&lt;quote&gt;:&lt;space&gt;37.428737&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_lon&lt;quote&gt;:&lt;space&gt;138.747797&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_name&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;test&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_rotation&lt;quote&gt;:&lt;space&gt;30&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;request_datetime&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;2024-11-22&lt;space&gt;16:28:32+09:00&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;request_id&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;000&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;source_format&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;obj&lt;quote&gt;&lt;lf&gt;&lt;closecurly&gt;&lt;lf&gt;"
+#!   IS_STAND_ALONE="true"
+#! />
+#! <GLOBAL_PARAMETER
+#!   GUI_LINE="GUI OPTIONAL TEXT_EDIT_OR_ATTR SUCCESS_MESSAGE_JSON FME_SYNTAX%JSON%FME_INCLUDEBROWSE%NO%FME_INLINE%NO Success Message JSON"
+#!   DEFAULT_VALUE="&lt;opencurly&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;fme_job_id&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;fme_result&lt;quote&gt;:&lt;space&gt;true&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;obj_elevation&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;115.869&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;obj_type&lt;quote&gt;:&lt;space&gt;0&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;removed&lt;quote&gt;:&lt;space&gt;false&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;tileset_url&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;https:&lt;solidus&gt;&lt;solidus&gt;s3.ap-northeast-1.amazonaws.com&lt;solidus&gt;vrobject&lt;solidus&gt;3d-tiles&lt;solidus&gt;test&lt;solidus&gt;tileset.json&lt;quote&gt;&lt;lf&gt;&lt;closecurly&gt;&lt;lf&gt;"
+#!   IS_STAND_ALONE="true"
+#! />
+#! <GLOBAL_PARAMETER
+#!   GUI_LINE="GUI NAMED_DB_CONNECTION_ENCODED DestDataset_POSTGRES FMT:POSTGRES%FAMILY:PostgreSQL Connection:"
+#!   DEFAULT_VALUE="PostgreSQL_echigo_simulation"
+#!   IS_STAND_ALONE="false"
+#! />
+#! </GLOBAL_PARAMETERS>
+#! <USER_PARAMETERS
+#!   FORM="eyJwYXJhbWV0ZXJzIjpbeyJuYW1lIjoiUkVRVUVTVF9NRVNTQUdFX0pTT04iLCJwcm9tcHQiOiJSZXF1ZXN0IE1lc3NhZ2UgSlNPTiIsInNob3dQcm9tcHQiOnRydWUsInZhbHVlVHlwZSI6InN0cmluZ0VuY29kZWQiLCJyZXF1aXJlZCI6dHJ1ZSwiZGVmYXVsdFZhbHVlIjoiPG9wZW5jdXJseT48bGY+PHRhYj48cXVvdGU+bW9kZWxfdXJsPHF1b3RlPjo8c3BhY2U+PHF1b3RlPmh0dHA6PHNvbGlkdXM+PHNvbGlkdXM+dnJvYmplY3QuczMuYW1hem9uYXdzLmNvbTxzb2xpZHVzPm9iajxzb2xpZHVzPllVRzAwMDFfMS56aXA8cXVvdGU+PGNvbW1hPjxsZj48dGFiPjxxdW90ZT5vYmpfaGVpZ2h0PHF1b3RlPjo8c3BhY2U+MTxjb21tYT48bGY+PHRhYj48cXVvdGU+b2JqX2lkPHF1b3RlPjo8c3BhY2U+MTIzNDU8Y29tbWE+PGxmPjx0YWI+PHF1b3RlPm9ial9sYXQ8cXVvdGU+OjxzcGFjZT4zNy40Mjg3Mzc8Y29tbWE+PGxmPjx0YWI+PHF1b3RlPm9ial9sb248cXVvdGU+OjxzcGFjZT4xMzguNzQ3Nzk3PGNvbW1hPjxsZj48dGFiPjxxdW90ZT5vYmpfbmFtZTxxdW90ZT46PHNwYWNlPjxxdW90ZT50ZXN0PHF1b3RlPjxjb21tYT48bGY+PHRhYj48cXVvdGU+b2JqX3JvdGF0aW9uPHF1b3RlPjo8c3BhY2U+MzA8Y29tbWE+PGxmPjx0YWI+PHF1b3RlPnJlcXVlc3RfZGF0ZXRpbWU8cXVvdGU+OjxzcGFjZT48cXVvdGU+MjAyNC0xMS0yMjxzcGFjZT4xNjoyODozMiswOTowMDxxdW90ZT48Y29tbWE+PGxmPjx0YWI+PHF1b3RlPnJlcXVlc3RfaWQ8cXVvdGU+OjxzcGFjZT48cXVvdGU+MDAwPHF1b3RlPjxjb21tYT48bGY+PHRhYj48cXVvdGU+c291cmNlX2Zvcm1hdDxxdW90ZT46PHNwYWNlPjxxdW90ZT5vYmo8cXVvdGU+PGxmPjxjbG9zZWN1cmx5PjxsZj4iLCJzdXBwb3J0ZWRWYWx1ZVR5cGVzIjpbImV4cHJlc3Npb24iLCJnbG9iYWxQYXJhbWV0ZXIiXSwidHlwZSI6InRleHQiLCJlZGl0b3IiOiJqc29uIiwic2hvd0lubGluZUVkaXRvciI6ZmFsc2UsInNob3dFZGl0QnV0dG9uIjpmYWxzZX0seyJuYW1lIjoiU1VDQ0VTU19NRVNTQUdFX0pTT04iLCJwcm9tcHQiOiJTdWNjZXNzIE1lc3NhZ2UgSlNPTiIsInNob3dQcm9tcHQiOnRydWUsInZhbHVlVHlwZSI6InN0cmluZ0VuY29kZWQiLCJyZXF1aXJlZCI6ZmFsc2UsImRlZmF1bHRWYWx1ZSI6IjxvcGVuY3VybHk+PGxmPjxzcGFjZT48c3BhY2U+PHNwYWNlPjxzcGFjZT48cXVvdGU+Zm1lX2pvYl9pZDxxdW90ZT46PHNwYWNlPjxxdW90ZT48cXVvdGU+PGNvbW1hPjxsZj48c3BhY2U+PHNwYWNlPjxzcGFjZT48c3BhY2U+PHF1b3RlPmZtZV9yZXN1bHQ8cXVvdGU+OjxzcGFjZT50cnVlPGNvbW1hPjxsZj48c3BhY2U+PHNwYWNlPjxzcGFjZT48c3BhY2U+PHF1b3RlPm9ial9lbGV2YXRpb248cXVvdGU+OjxzcGFjZT48cXVvdGU+MTE1Ljg2OTxxdW90ZT48Y29tbWE+PGxmPjxzcGFjZT48c3BhY2U+PHNwYWNlPjxzcGFjZT48cXVvdGU+b2JqX3R5cGU8cXVvdGU+OjxzcGFjZT4wPGNvbW1hPjxsZj48c3BhY2U+PHNwYWNlPjxzcGFjZT48c3BhY2U+PHF1b3RlPnJlbW92ZWQ8cXVvdGU+OjxzcGFjZT5mYWxzZTxjb21tYT48bGY+PHNwYWNlPjxzcGFjZT48c3BhY2U+PHNwYWNlPjxxdW90ZT50aWxlc2V0X3VybDxxdW90ZT46PHNwYWNlPjxxdW90ZT5odHRwczo8c29saWR1cz48c29saWR1cz5zMy5hcC1ub3J0aGVhc3QtMS5hbWF6b25hd3MuY29tPHNvbGlkdXM+dnJvYmplY3Q8c29saWR1cz4zZC10aWxlczxzb2xpZHVzPnRlc3Q8c29saWR1cz50aWxlc2V0Lmpzb248cXVvdGU+PGxmPjxjbG9zZWN1cmx5PjxsZj4iLCJzdXBwb3J0ZWRWYWx1ZVR5cGVzIjpbImV4cHJlc3Npb24iLCJnbG9iYWxQYXJhbWV0ZXIiXSwidHlwZSI6InRleHQiLCJlZGl0b3IiOiJqc29uIiwic2hvd0lubGluZUVkaXRvciI6ZmFsc2UsInNob3dFZGl0QnV0dG9uIjpmYWxzZX0seyJuYW1lIjoiRGVzdERhdGFzZXRfUE9TVEdSRVMiLCJwcm9tcHQiOiJDb25uZWN0aW9uOiIsInZhbHVlVHlwZSI6InN0cmluZ0VuY29kZWQiLCJyZXF1aXJlZCI6dHJ1ZSwiZGVmYXVsdFZhbHVlIjoiUG9zdGdyZVNRTF9lY2hpZ29fc2ltdWxhdGlvbiIsInN1cHBvcnRlZFZhbHVlVHlwZXMiOlsiZ2xvYmFsUGFyYW1ldGVyIl0sImNob2ljZVNldHRpbmdzIjp7ImNob2ljZVNldCI6ImRiQ29ubmVjdGlvbnMiLCJmYW1pbHkiOiJQb3N0Z3JlU1FMIiwiZm9ybWF0IjoiUE9TVEdSRVMifSwidHlwZSI6ImRyb3Bkb3duIn1dfQ=="
+#! >
+#! <PARAMETER_INFO>
+#!     <INFO NAME="REQUEST_MESSAGE_JSON" 
+#!   DEFAULT_VALUE="&lt;opencurly&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;model_url&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;http:&lt;solidus&gt;&lt;solidus&gt;vrobject.s3.amazonaws.com&lt;solidus&gt;obj&lt;solidus&gt;YUG0001_1.zip&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_height&lt;quote&gt;:&lt;space&gt;1&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_id&lt;quote&gt;:&lt;space&gt;12345&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_lat&lt;quote&gt;:&lt;space&gt;37.428737&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_lon&lt;quote&gt;:&lt;space&gt;138.747797&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_name&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;test&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;obj_rotation&lt;quote&gt;:&lt;space&gt;30&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;request_datetime&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;2024-11-22&lt;space&gt;16:28:32+09:00&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;request_id&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;000&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;tab&gt;&lt;quote&gt;source_format&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;obj&lt;quote&gt;&lt;lf&gt;&lt;closecurly&gt;&lt;lf&gt;"
+#!   SCOPE="STAND_ALONE"
+#!   GENERATED_GUI_LINE="true"
+#!   GUI_LINE="GUI TEXT_EDIT_OR_ATTR REQUEST_MESSAGE_JSON FME_SYNTAX%JSON%FME_INCLUDEBROWSE%NO%FME_INLINE%NO Request Message JSON"
+#! />
+#!     <INFO NAME="SUCCESS_MESSAGE_JSON" 
+#!   DEFAULT_VALUE="&lt;opencurly&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;fme_job_id&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;fme_result&lt;quote&gt;:&lt;space&gt;true&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;obj_elevation&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;115.869&lt;quote&gt;&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;obj_type&lt;quote&gt;:&lt;space&gt;0&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;removed&lt;quote&gt;:&lt;space&gt;false&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;quote&gt;tileset_url&lt;quote&gt;:&lt;space&gt;&lt;quote&gt;https:&lt;solidus&gt;&lt;solidus&gt;s3.ap-northeast-1.amazonaws.com&lt;solidus&gt;vrobject&lt;solidus&gt;3d-tiles&lt;solidus&gt;test&lt;solidus&gt;tileset.json&lt;quote&gt;&lt;lf&gt;&lt;closecurly&gt;&lt;lf&gt;"
+#!   SCOPE="STAND_ALONE"
+#!   GENERATED_GUI_LINE="true"
+#!   GUI_LINE="GUI OPTIONAL TEXT_EDIT_OR_ATTR SUCCESS_MESSAGE_JSON FME_SYNTAX%JSON%FME_INCLUDEBROWSE%NO%FME_INLINE%NO Success Message JSON"
+#! />
+#!     <INFO NAME="DestDataset_POSTGRES" 
+#!   DEFAULT_VALUE="PostgreSQL_echigo_simulation"
+#!   SCOPE="DEPENDENT"
+#!   GENERATED_GUI_LINE="true"
+#!   GUI_LINE="GUI NAMED_DB_CONNECTION_ENCODED DestDataset_POSTGRES FMT:POSTGRES%FAMILY:PostgreSQL Connection:"
+#! />
+#! </PARAMETER_INFO>
+#! </USER_PARAMETERS>
+#! <COMMENTS>
+#! <COMMENT
+#!   IDENTIFIER="25"
+#!   COMMENT_VALUE="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&#10;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;&#10;p, li { white-space: pre-wrap; }&#10;hr { height: 1px; border-width: 0; }&#10;li.unchecked::marker { content: &quot;\2610&quot;; }&#10;li.checked::marker { content: &quot;\2612&quot;; }&#10;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;&#10;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;基準時刻&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
+#!   POSITION="-140.91831084977497 -108.00168001680018"
+#!   TOP_LEFT="-140.91831084977497 -108.00168001680018"
+#!   BOTTOM_RIGHT="295.05429887632226 -109.00168001680018"
+#!   BOUNDING_RECT="-140.91831084977497 -108.00168001680018 435.97260972609723 1"
+#!   ORDER="500000000000093"
+#!   FOLLOW_ANCHOR="true"
+#!   INFO_NODE="false"
+#!   CUSTOM_USER_COLOR="false"
+#!   UUID="{4fc17eb8-5aa5-4dea-a96b-f8086c30ab38}"
+#!   COLOUR="0.67843137254901964,0.80784313725490198,0.72941176470588232,1"
+#!   SIZE_POLICY="10"
+#!   ANCHORED_NODE="9"
+#! />
+#! <COMMENT
+#!   IDENTIFIER="26"
+#!   COMMENT_VALUE="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&#10;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;&#10;p, li { white-space: pre-wrap; }&#10;hr { height: 1px; border-width: 0; }&#10;li.unchecked::marker { content: &quot;\2610&quot;; }&#10;li.checked::marker { content: &quot;\2612&quot;; }&#10;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;&#10;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;日本時間に修正&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
+#!   POSITION="429.11570782374497 -108.00168001680018"
+#!   TOP_LEFT="429.11570782374497 -108.00168001680018"
+#!   BOTTOM_RIGHT="887.16666333329999 -109.00168001680018"
+#!   BOUNDING_RECT="429.11570782374497 -108.00168001680018 458.05095550955508 1"
+#!   ORDER="500000000000094"
+#!   FOLLOW_ANCHOR="true"
+#!   INFO_NODE="false"
+#!   CUSTOM_USER_COLOR="false"
+#!   UUID="{7f38648d-6202-4cd0-a2e4-9551228b36b9}"
+#!   COLOUR="0.67843137254901964,0.80784313725490198,0.72941176470588232,1"
+#!   SIZE_POLICY="10"
+#!   ANCHORED_NODE="13"
+#! />
+#! <COMMENT
+#!   IDENTIFIER="27"
+#!   COMMENT_VALUE="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&#10;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;&#10;p, li { white-space: pre-wrap; }&#10;hr { height: 1px; border-width: 0; }&#10;li.unchecked::marker { content: &quot;\2610&quot;; }&#10;li.checked::marker { content: &quot;\2612&quot;; }&#10;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;&#10;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;表示形式を修正&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
+#!   POSITION="1021.2552417711677 -108.00168001680018"
+#!   TOP_LEFT="1021.2552417711677 -108.00168001680018"
+#!   BOTTOM_RIGHT="1472.6498807175572 -109.00168001680018"
+#!   BOUNDING_RECT="1021.2552417711677 -108.00168001680018 451.39463894638942 1"
+#!   ORDER="500000000000095"
+#!   FOLLOW_ANCHOR="true"
+#!   INFO_NODE="false"
+#!   CUSTOM_USER_COLOR="false"
+#!   UUID="{3f9e764d-a6dd-408d-ba44-e7e2b7e850d8}"
+#!   COLOUR="0.67843137254901964,0.80784313725490198,0.72941176470588232,1"
+#!   SIZE_POLICY="10"
+#!   ANCHORED_NODE="15"
+#! />
+#! <COMMENT
+#!   IDENTIFIER="28"
+#!   COMMENT_VALUE="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&#10;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;&#10;p, li { white-space: pre-wrap; }&#10;hr { height: 1px; border-width: 0; }&#10;li.unchecked::marker { content: &quot;\2610&quot;; }&#10;li.checked::marker { content: &quot;\2612&quot;; }&#10;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;&#10;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;resultにrequestメッセージとsuccessメッセージのjsonを集約&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
+#!   POSITION="2746.8887338873383 81.000210002100033"
+#!   TOP_LEFT="2746.8887338873383 81.000210002100033"
+#!   BOTTOM_RIGHT="3182.8613436134356 80.000210002100033"
+#!   BOUNDING_RECT="2746.8887338873383 81.000210002100033 435.97260972609723 1"
+#!   ORDER="500000000000096"
+#!   FOLLOW_ANCHOR="true"
+#!   INFO_NODE="false"
+#!   CUSTOM_USER_COLOR="false"
+#!   UUID="{f3140d23-cfe5-4bdc-9f98-9ac76b070443}"
+#!   COLOUR="1,0.95686274509803926,0.80000000000000004,0.90196078431372551"
+#!   SIZE_POLICY="10"
+#!   ANCHORED_NODE="7"
+#! />
+#! </COMMENTS>
+#! <CONSTANTS>
+#! </CONSTANTS>
+#! <BOOKMARKS>
+#! <BOOKMARK
+#!   IDENTIFIER="24"
+#!   NAME="現在時刻を表示"
+#!   DESCRIPTION=""
+#!   TOP_LEFT="-190.94570112367774 76.230270499426311"
+#!   ORDER="500000000000092"
+#!   PALETTE_COLOR="Workflow3"
+#!   BOTTOM_RIGHT="1522.6771167711677 -530.00255002549989"
+#!   BOUNDING_RECT="-190.94570112367774 76.230270499426311 1713.6228178948454 606.23282052492618"
+#!   STICKY="true"
+#!   COLOUR="0.67843137254901964,0.80784313725490198,0.72941176470588232,1"
+#!   CONTENTS="26 15 14 25 16 13 9 27 "
+#! >
+#! </BOOKMARK>
+#! </BOOKMARKS>
+#! <TRANSFORMERS>
+#! <TRANSFORMER
+#!   IDENTIFIER="2"
+#!   TYPE="Creator"
+#!   VERSION="7"
+#!   POSITION="-711.00711007110044 -255.00255002550026"
+#!   BOUNDING_RECT="-711.00711007110044 -255.00255002550026 436 65"
+#!   ORDER="500000000000076"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24783"
+#! >
+#!     <OUTPUT_FEAT NAME="CREATED"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="ATEND" PARM_VALUE="no"/>
+#!     <XFORM_PARM PARM_NAME="COORDSYS" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="CRE_ATTR" PARM_VALUE="_creation_instance"/>
+#!     <XFORM_PARM PARM_NAME="GEOJSON" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="GEOM" PARM_VALUE="&lt;lt&gt;?xml&lt;space&gt;version=&lt;quote&gt;1.0&lt;quote&gt;&lt;space&gt;encoding=&lt;quote&gt;US_ASCII&lt;quote&gt;&lt;space&gt;standalone=&lt;quote&gt;no&lt;quote&gt;&lt;space&gt;?&lt;gt&gt;&lt;lt&gt;geometry&lt;gt&gt;&lt;lt&gt;null&lt;solidus&gt;&lt;gt&gt;&lt;lt&gt;&lt;solidus&gt;geometry&lt;gt&gt;"/>
+#!     <XFORM_PARM PARM_NAME="GEOMTYPE" PARM_VALUE="Geometry Object"/>
+#!     <XFORM_PARM PARM_NAME="NUM" PARM_VALUE="1"/>
+#!     <XFORM_PARM PARM_NAME="OAN_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="Creator"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="3"
+#!   TYPE="ParameterFetcher"
+#!   VERSION="4"
+#!   POSITION="1606.7385257185904 -255.00255002550026"
+#!   BOUNDING_RECT="1606.7385257185904 -255.00255002550026 436 65"
+#!   ORDER="500000000000077"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24783"
+#! >
+#!     <OUTPUT_FEAT NAME="OUTPUT"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_REQUEST_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_SUCCESS_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="ATTR_LIST" PARM_VALUE="_REQUEST_MESSAGE_JSON $(REQUEST_MESSAGE_JSON) _SUCCESS_MESSAGE_JSON $(SUCCESS_MESSAGE_JSON)"/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="ParameterFetcher"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="5"
+#!   TYPE="Tester"
+#!   VERSION="4"
+#!   POSITION="2176.7999346660131 -255.00255002550026"
+#!   BOUNDING_RECT="2176.7999346660131 -255.00255002550026 436 65"
+#!   ORDER="500000000000078"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24783"
+#! >
+#!     <OUTPUT_FEAT NAME="PASSED"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_REQUEST_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_SUCCESS_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <OUTPUT_FEAT NAME="FAILED"/>
+#!     <FEAT_COLLAPSED COLLAPSED="1"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_REQUEST_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_SUCCESS_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_PARM PARM_NAME="ADVANCED_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="BOOL_OP" PARM_VALUE="OR"/>
+#!     <XFORM_PARM PARM_NAME="COMPOSITE_MSG" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="COMPOSITE_TEST" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="PRESERVE_FEATURE_ORDER" PARM_VALUE="PER_OUTPUT_PORT"/>
+#!     <XFORM_PARM PARM_NAME="TEST_CLAUSE" PARM_VALUE="TEST _SUCCESS_MESSAGE_JSON ATTRIBUTE_HAS_A_VALUE &quot;&quot;"/>
+#!     <XFORM_PARM PARM_NAME="TEST_CLAUSE_GRP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TEST_MODE" PARM_VALUE="TEST"/>
+#!     <XFORM_PARM PARM_NAME="TEST_PREVIEW_GROUP" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="Tester"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="7"
+#!   TYPE="JSONTemplater"
+#!   VERSION="0"
+#!   POSITION="2746.8613436134356 -255.00255002550026"
+#!   BOUNDING_RECT="2746.8613436134356 -255.00255002550026 436 65"
+#!   ORDER="500000000000079"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24612"
+#! >
+#!     <OUTPUT_FEAT NAME="OUTPUT"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_REQUEST_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_SUCCESS_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="result" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="CONSECUTIVE_GROUPS" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="DYNGROUP_0" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="GEO_TABLE_GROUP" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="GROUP_BY" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="GROUP_PROCESSING_GROUP" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="OAN_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="RESULT_ATTRIBUTE" PARM_VALUE="result"/>
+#!     <XFORM_PARM PARM_NAME="ROOT_QUERY_EXPR" PARM_VALUE="&lt;opencurly&gt;|&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;fme:get-json-attribute&lt;openparen&gt;&lt;quote&gt;_REQUEST_MESSAGE_JSON&lt;quote&gt;&lt;closeparen&gt;&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;fme:get-json-attribute&lt;openparen&gt;&lt;quote&gt;_SUCCESS_MESSAGE_JSON&lt;quote&gt;&lt;closeparen&gt;&lt;comma&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;opencurly&gt;&lt;quote&gt;update_datetime&lt;quote&gt;:fme:get-attribute&lt;openparen&gt;&lt;quote&gt;_timestamp&lt;quote&gt;&lt;closeparen&gt;&lt;closecurly&gt;&lt;lf&gt;|&lt;closecurly&gt;"/>
+#!     <XFORM_PARM PARM_NAME="ROOT_QUERY_FILE" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="ROOT_TABLE_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="SUB_TABLE_GROUP" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="SUB_TEMPLATE_PARAMS" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="VISIBLE_QUERY_VALIDATE" PARM_VALUE="Yes"/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="JSONTemplater"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="9"
+#!   TYPE="DateTimeStamper"
+#!   VERSION="1"
+#!   POSITION="-140.94570112367774 -255.00255002550026"
+#!   BOUNDING_RECT="-140.94570112367774 -255.00255002550026 436 65"
+#!   ORDER="500000000000081"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24612"
+#! >
+#!     <OUTPUT_FEAT NAME="OUTPUT"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="DATETIME_ATTR" PARM_VALUE="_timestamp"/>
+#!     <XFORM_PARM PARM_NAME="INCLUDE_FRAC_SECONDS" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="INCLUDE_OFFSET" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="OAN_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PREVIEW" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PREVIEW_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="STAMP_TYPE" PARM_VALUE="datetime"/>
+#!     <XFORM_PARM PARM_NAME="TIMEZONE" PARM_VALUE="utc"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="DateTimeStamper"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="13"
+#!   TYPE="DateTimeCalculator"
+#!   VERSION="5"
+#!   POSITION="429.11570782374497 -255.00255002550026"
+#!   BOUNDING_RECT="429.11570782374497 -255.00255002550026 458.078125 65"
+#!   ORDER="500000000000082"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24612"
+#! >
+#!     <OUTPUT_FEAT NAME="OUTPUT"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <OUTPUT_FEAT NAME="&lt;REJECTED&gt;"/>
+#!     <FEAT_COLLAPSED COLLAPSED="1"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="fme_rejection_code" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_PARM PARM_NAME="MODE" PARM_VALUE="DATETIMECALC_1_ADD_INTERVAL"/>
+#!     <XFORM_PARM PARM_NAME="OPERATION_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="OPERATION_PARAMETERS" PARM_VALUE="START_DATETIME]&lt;at&gt;Value&lt;openparen&gt;_timestamp&lt;closeparen&gt;]OPERATOR]ADD]YEARS]0]MONTHS]0]DAYS]0]HOURS]9]MINUTES]0]SECONDS]0]RESULT_DATETIME]_timestamp]FME_CONTROLLER_QUERY_FILE]transformers&lt;solidus&gt;dependencies&lt;solidus&gt;datetimecalculator&lt;solidus&gt;DATETIMECALC_1_ADD_INTERVAL.fme]FME_CONTROLLER_CHOICE]DATETIMECALC_1_ADD_INTERVAL"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="DateTimeCalculator"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="15"
+#!   TYPE="DateTimeConverter"
+#!   VERSION="5"
+#!   POSITION="1021.2552417711677 -255.00255002550026"
+#!   BOUNDING_RECT="1021.2552417711677 -255.00255002550026 451.421875 65"
+#!   ORDER="500000000000083"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24612"
+#! >
+#!     <OUTPUT_FEAT NAME="OUTPUT"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <OUTPUT_FEAT NAME="&lt;REJECTED&gt;"/>
+#!     <FEAT_COLLAPSED COLLAPSED="1"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="fme_rejection_code" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="fme_rejection_message" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_PARM PARM_NAME="DATETIME_ATTR" PARM_VALUE="_timestamp"/>
+#!     <XFORM_PARM PARM_NAME="IN_FORMAT" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="OUT_FORMAT" PARM_VALUE="ISO"/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PASSTHROUGH" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="REFERENCE" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="REFERENCE_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="REPAIR_INPUT" PARM_VALUE="YES"/>
+#!     <XFORM_PARM PARM_NAME="TEST_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TEST_INPUT" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TEST_INPUT_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TEST_RESULT" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="DateTimeConverter"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="19"
+#!   TYPE="JSONExtractor"
+#!   VERSION="6"
+#!   POSITION="3316.9227525608585 -255.00255002550026"
+#!   BOUNDING_RECT="3316.9227525608585 -255.00255002550026 436 65"
+#!   ORDER="500000000000084"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24612"
+#! >
+#!     <OUTPUT_FEAT NAME="EVALUATED"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_REQUEST_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="_SUCCESS_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="result" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="uuid" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <OUTPUT_FEAT NAME="&lt;REJECTED&gt;"/>
+#!     <FEAT_COLLAPSED COLLAPSED="1"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_timestamp" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_REQUEST_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="_SUCCESS_MESSAGE_JSON" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="result" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="fme_rejection_code" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="uuid" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_PARM PARM_NAME="EXTRACT_QUERY_TABLE" PARM_VALUE="uuid json&lt;openbracket&gt;&lt;quote&gt;request_id&lt;quote&gt;&lt;closebracket&gt;"/>
+#!     <XFORM_PARM PARM_NAME="FILEPATH_OR_URL" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="INPUT_SETTINGS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="JSON_DOCUMENT" PARM_VALUE="&lt;at&gt;Value&lt;openparen&gt;result&lt;closeparen&gt;"/>
+#!     <XFORM_PARM PARM_NAME="QUERY_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="READ_FROM_FILE" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="JSONExtractor"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="21"
+#!   TYPE="AttributeManager"
+#!   VERSION="5"
+#!   POSITION="3886.9841615082814 -255.00255002550026"
+#!   BOUNDING_RECT="3886.9841615082814 -255.00255002550026 436 65"
+#!   ORDER="500000000000085"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24612"
+#! >
+#!     <OUTPUT_FEAT NAME="OUTPUT"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="uuid" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="result" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="status" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="created_at" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="ATTRIBUTE_GRP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="ATTRIBUTE_HANDLING" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="ATTR_TABLE" PARM_VALUE="uuid uuid  varchar&lt;openparen&gt;200&lt;closeparen&gt; NO_OP result result  buffer NO_OP  status done varchar&lt;openparen&gt;4&lt;closeparen&gt; SET_TO _creation_instance _creation_instance  uint64 REMOVE _timestamp created_at  buffer RENAME_SET_VALUE _REQUEST_MESSAGE_JSON _REQUEST_MESSAGE_JSON  buffer REMOVE _SUCCESS_MESSAGE_JSON _SUCCESS_MESSAGE_JSON  buffer REMOVE"/>
+#!     <XFORM_PARM PARM_NAME="MULTI_FEATURE_MODE" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="NULL_ATTR_MODE" PARM_VALUE="NO_OP"/>
+#!     <XFORM_PARM PARM_NAME="NULL_ATTR_VALUE" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="NUM_PRIOR_FEATURES" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="NUM_SUBSEQUENT_FEATURES" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="USER_EXPOSED_ATTRIBUTES" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="USER_MODIFIED_ATTRIBUTE_TYPES" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="AttributeManager"/>
+#!     <XFORM_PARM PARM_NAME="NULL_ATTR_MODE_DISPLAY" PARM_IS_LOOKUP="true" PARM_VALUE="No Substitution"/>
+#! </TRANSFORMER>
+#! </TRANSFORMERS>
+#! <FEAT_LINKS>
+#! <FEAT_LINK
+#!   IDENTIFIER="10"
+#!   SOURCE_NODE="2"
+#!   TARGET_NODE="9"
+#!   SOURCE_PORT_DESC="fo 0 CREATED"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="12"
+#!   SOURCE_NODE="3"
+#!   TARGET_NODE="5"
+#!   SOURCE_PORT_DESC="fo 0 OUTPUT"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="8"
+#!   SOURCE_NODE="5"
+#!   TARGET_NODE="7"
+#!   SOURCE_PORT_DESC="fo 0 PASSED"
+#!   TARGET_PORT_DESC="fi 0 ROOT"
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="20"
+#!   SOURCE_NODE="7"
+#!   TARGET_NODE="19"
+#!   SOURCE_PORT_DESC="fo 0 OUTPUT"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="14"
+#!   SOURCE_NODE="9"
+#!   TARGET_NODE="13"
+#!   SOURCE_PORT_DESC="fo 0 OUTPUT"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="16"
+#!   SOURCE_NODE="13"
+#!   TARGET_NODE="15"
+#!   SOURCE_PORT_DESC="fo 0 OUTPUT"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="17"
+#!   SOURCE_NODE="15"
+#!   TARGET_NODE="3"
+#!   SOURCE_PORT_DESC="fo 0 OUTPUT"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="22"
+#!   SOURCE_NODE="19"
+#!   TARGET_NODE="21"
+#!   SOURCE_PORT_DESC="fo 0 EVALUATED"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="23"
+#!   SOURCE_NODE="21"
+#!   TARGET_NODE="18"
+#!   SOURCE_PORT_DESC="fo 0 OUTPUT"
+#!   TARGET_PORT_DESC="-1"
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.050980392156862744,0.050980392156862744,0.047058823529411764,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! </FEAT_LINKS>
+#! <BREAKPOINTS>
+#! </BREAKPOINTS>
+#! <ATTR_LINKS>
+#! </ATTR_LINKS>
+#! <SUBDOCUMENTS>
+#! </SUBDOCUMENTS>
+#! <LOOKUP_TABLES>
+#! </LOOKUP_TABLES>
+#! </WORKSPACE>
+
+FME_PYTHON_VERSION 312
+ARCGIS_COMPATIBILITY ARCGIS_AUTO
+GUI IGNORE DestDataset_POSTGRES_1,POSTGRES_OUT_FME_CONNECTION_GROUP_POSTGRES_1,POSTGRES_OUT_ADVANCED_POSTGRES_1,POSTGRES_OUT_BULK_COPY_POSTGRES_1,POSTGRES_OUT_MISSING_ATTRIBUTE_BEHAVIOUR_POSTGRES_1,POSTGRES_OUT_START_TRANSACTION_POSTGRES_1,POSTGRES_OUT_TRANSACTION_INTERVAL_POSTGRES_1,POSTGRES_OUT_BEGIN_SQL_POSTGRES_1,POSTGRES_OUT_END_SQL_POSTGRES_1
+# ============================================================================
+DEFAULT_MACRO REQUEST_MESSAGE_JSON <opencurly><lf><tab><quote>model_url<quote>:<space><quote>http:<solidus><solidus>vrobject.s3.amazonaws.com<solidus>obj<solidus>YUG0001_1.zip<quote><comma><lf><tab><quote>obj_height<quote>:<space>1<comma><lf><tab><quote>obj_id<quote>:<space>12345<comma><lf><tab><quote>obj_lat<quote>:<space>37.428737<comma><lf><tab><quote>obj_lon<quote>:<space>138.747797<comma><lf><tab><quote>obj_name<quote>:<space><quote>test<quote><comma><lf><tab><quote>obj_rotation<quote>:<space>30<comma><lf><tab><quote>request_datetime<quote>:<space><quote>2024-11-22<space>16:28:32+09:00<quote><comma><lf><tab><quote>request_id<quote>:<space><quote>000<quote><comma><lf><tab><quote>source_format<quote>:<space><quote>obj<quote><lf><closecurly><lf>
+
+DEFAULT_MACRO SUCCESS_MESSAGE_JSON <opencurly><lf><space><space><space><space><quote>fme_job_id<quote>:<space><quote><quote><comma><lf><space><space><space><space><quote>fme_result<quote>:<space>true<comma><lf><space><space><space><space><quote>obj_elevation<quote>:<space><quote>115.869<quote><comma><lf><space><space><space><space><quote>obj_type<quote>:<space>0<comma><lf><space><space><space><space><quote>removed<quote>:<space>false<comma><lf><space><space><space><space><quote>tileset_url<quote>:<space><quote>https:<solidus><solidus>s3.ap-northeast-1.amazonaws.com<solidus>vrobject<solidus>3d-tiles<solidus>test<solidus>tileset.json<quote><lf><closecurly><lf>
+
+DEFAULT_MACRO DestDataset_POSTGRES PostgreSQL_echigo_simulation
+
+# ============================================================================
+INCLUDE [ if {{$(REQUEST_MESSAGE_JSON$encode)} == {}} { puts_real {Parameter 'REQUEST_MESSAGE_JSON' must be given a value.}; exit 1; }; ]
+INCLUDE [ if {{$(DestDataset_POSTGRES$encode)} == {}} { puts_real {Parameter 'DestDataset_POSTGRES' must be given a value.}; exit 1; }; ]
+#! START_HEADER
+#! START_WB_HEADER
+READER_TYPE MULTI_READER
+WRITER_TYPE MULTI_WRITER
+WRITER_KEYWORD PRIMARY_DEST
+PRIMARY_DEST_DATASET_ORDER BY_ID
+PRIMARY_DEST_FIRST_WRITER_ID 0
+PRIMARY_DEST_TYPE{0} POSTGRES
+PRIMARY_DEST_KEYWORD{0} POSTGRES_1
+PRIMARY_DEST_GEN_DIRECTIVES{0} ADVANCED,,END_SQL,,LOWERCASE_ATTRIBUTE_NAMES,Yes,ADD_WRITER_NEXT_ACTION,import,COORDINATE_SYSTEM_GRANULARITY,FEATURE,BULK_COPY,YES,TRANSACTION_INTERVAL,1000,BEGIN_SQL,,NAMED_CONNECTION,PostgreSQL_echigo_simulation,STRICT_TEMPORAL_TYPE_HANDLING,Yes,START_TRANSACTION,0,MISSING_ATTRIBUTE_BEHAVIOUR,<lt>Unused<gt>
+#! END_WB_HEADER
+#! START_WB_HEADER
+MACRO WB_KEYWORD "POSTGRES_1"
+#! END_WB_HEADER
+#! START_DEST_HEADER POSTGRES POSTGRES_1
+#! END_DEST_HEADER
+#! START_WB_HEADER
+DEFAULT_MACRO DestDataset
+INCLUDE [ if {"$(DestDataset)" != ""} {                          \
+ puts {DEFAULT_MACRO DestDataset_POSTGRES_1 $(DestDataset)}         \
+ } ]
+#! END_WB_HEADER
+#! START_DEST_HEADER POSTGRES POSTGRES_1
+DEFAULT_MACRO DestDataset_POSTGRES_1 $(DestDataset_POSTGRES)
+GUI NAMED_DB_CONNECTION_ENCODED DestDataset_POSTGRES_1 FMT:POSTGRES Connection:
+DEFAULT_MACRO POSTGRES_OUT_STRICT_TEMPORAL_TYPE_HANDLING_POSTGRES_1 Yes
+POSTGRES_1_STRICT_TEMPORAL_TYPE_HANDLING "$(POSTGRES_OUT_STRICT_TEMPORAL_TYPE_HANDLING_POSTGRES_1)"
+DEFAULT_MACRO POSTGRES_OUT_FME_CONNECTION_GROUP_POSTGRES_1 
+GUI OPTIONAL DISCLOSUREGROUP POSTGRES_OUT_FME_CONNECTION_GROUP_POSTGRES_1 POSTGRES_OUT_NAMED_CONNECTION Database Connection
+DEFAULT_MACRO POSTGRES_OUT_ADVANCED_POSTGRES_1 
+GUI OPTIONAL DISCLOSUREGROUP POSTGRES_OUT_ADVANCED_POSTGRES_1 POSTGRES_OUT_BULK_COPY_POSTGRES_1%POSTGRES_OUT_MISSING_ATTRIBUTE_BEHAVIOUR_POSTGRES_1%POSTGRES_OUT_START_TRANSACTION_POSTGRES_1%POSTGRES_OUT_TRANSACTION_INTERVAL_POSTGRES_1%POSTGRES_OUT_BEGIN_SQL_POSTGRES_1%POSTGRES_OUT_END_SQL_POSTGRES_1 Advanced
+DEFAULT_MACRO POSTGRES_OUT_BULK_COPY_POSTGRES_1 YES
+POSTGRES_1_BULK_COPY "$(POSTGRES_OUT_BULK_COPY_POSTGRES_1)"
+GUI ACTIVECHOICE_LOOKUP POSTGRES_OUT_BULK_COPY_POSTGRES_1 YES,YES,POSTGRES_OUT_MISSING_ATTRIBUTE_BEHAVIOUR_POSTGRES_1%NO,NO Bulk Insert
+DEFAULT_MACRO POSTGRES_OUT_MISSING_ATTRIBUTE_BEHAVIOUR_POSTGRES_1 <Unused>
+POSTGRES_1_MISSING_ATTRIBUTE_BEHAVIOUR "$(POSTGRES_OUT_MISSING_ATTRIBUTE_BEHAVIOUR_POSTGRES_1)"
+GUI LOOKUP_CHOICE POSTGRES_OUT_MISSING_ATTRIBUTE_BEHAVIOUR_POSTGRES_1 Insert<space>column<space>default<space>value,default%Insert<space>null,null Missing Attribute Behavior:
+DEFAULT_MACRO POSTGRES_OUT_START_TRANSACTION_POSTGRES_1 0
+POSTGRES_1_START_TRANSACTION "$(POSTGRES_OUT_START_TRANSACTION_POSTGRES_1)"
+GUI TEXT POSTGRES_OUT_START_TRANSACTION_POSTGRES_1 Starting Feature:
+DEFAULT_MACRO POSTGRES_OUT_TRANSACTION_INTERVAL_POSTGRES_1 1000
+POSTGRES_1_TRANSACTION_INTERVAL "$(POSTGRES_OUT_TRANSACTION_INTERVAL_POSTGRES_1)"
+GUI TEXT POSTGRES_OUT_TRANSACTION_INTERVAL_POSTGRES_1 Features Per Transaction
+DEFAULT_MACRO POSTGRES_OUT_BEGIN_SQL_POSTGRES_1 
+POSTGRES_1_BEGIN_SQL "$(POSTGRES_OUT_BEGIN_SQL_POSTGRES_1)"
+GUI OPTIONAL TEXT_EDIT_SQL_CFG POSTGRES_OUT_BEGIN_SQL_POSTGRES_1 MODE,SQL;FORMAT,POSTGRES SQL To Run Before Write
+DEFAULT_MACRO POSTGRES_OUT_END_SQL_POSTGRES_1 
+POSTGRES_1_END_SQL "$(POSTGRES_OUT_END_SQL_POSTGRES_1)"
+GUI OPTIONAL TEXT_EDIT_SQL_CFG POSTGRES_OUT_END_SQL_POSTGRES_1 MODE,SQL;FORMAT,POSTGRES SQL To Run After Write
+DEFAULT_MACRO POSTGRES_OUT_COORDINATE_SYSTEM_GRANULARITY_POSTGRES_1 FEATURE
+POSTGRES_1_COORDINATE_SYSTEM_GRANULARITY "$(POSTGRES_OUT_COORDINATE_SYSTEM_GRANULARITY_POSTGRES_1)"
+# ============================================================================
+POSTGRES_1_GENERATE_FME_BUILD_NUM 24612
+POSTGRES_1_DATASET "$(DestDataset_POSTGRES_1)"
+#! END_DEST_HEADER
+#! START_WB_HEADER
+#! END_WB_HEADER
+#! END_HEADER
+
+LOG_FILENAME "$(FME_MF_DIR)$(WORKSPACE_NAME).log"
+LOG_APPEND NO
+LOG_MAX_FEATURES 200
+LOG_MAX_RECORDED_FEATURES 200
+FME_REPROJECTION_ENGINE FME
+FME_IMPLICIT_CSMAP_REPROJECTION_MODE Auto
+FME_GEOMETRY_HANDLING Enhanced
+FME_STROKE_MAX_DEVIATION 0
+FME_NAMES_ENCODING UTF-8
+FME_BULK_MODE_THRESHOLD 2000
+LAST_SAVE_BUILD "FME 2024.2.2.0 (20250114 - Build 24820 - macosx-aarch64)"
+DEFAULT_MACRO DATASET_KEYWORD_POSTGRES_1 POSTGRES_1
+# -------------------------------------------------------------------------
+
+MULTI_READER_CONTINUE_ON_READER_FAILURE No
+
+# -------------------------------------------------------------------------
+
+MACRO FME_VIEWER_APP fmedatainspector
+DEFAULT_MACRO WB_CURRENT_CONTEXT
+# -------------------------------------------------------------------------
+Tcl2 proc Creator_CoordSysRemover {} {   global FME_CoordSys;   set FME_CoordSys {}; }
+MACRO Creator_XML     NOT_ACTIVATED
+MACRO Creator_GEOJSON NOT_ACTIVATED
+INCLUDE [ if { {Geometry Object} == {Geometry Object} } {            puts {MACRO Creator_XML *} } ]
+INCLUDE [ if { {Geometry Object} == {GeoJSON} } {            puts {MACRO Creator_GEOJSON *} } ]
+FACTORY_DEF {$(Creator_XML)} CreationFactory    FACTORY_NAME { Creator_XML_Creator }    CREATE_AT_END { no }    OUTPUT { FEATURE_TYPE _____CREATED______        @Geometry(FROM_ENCODED_STRING,<lt>?xml<space>version=<quote>1.0<quote><space>encoding=<quote>US_ASCII<quote><space>standalone=<quote>no<quote><space>?<gt><lt>geometry<gt><lt>null<solidus><gt><lt><solidus>geometry<gt>) }
+FACTORY_DEF {$(Creator_GEOJSON)} CreationFactory    FACTORY_NAME { Creator_GEOJSON_Creator }    CREATE_AT_END { no }    OUTPUT { FEATURE_TYPE _____CREATED______ 	   @SupplyAttributes(ENCODED,__GeoJSONCreatorTemp__,<Unused>)        @JSONGeometry(FROM_ATTRIBUTE,GEOJSON,__GeoJSONCreatorTemp__, PREFER_ERROR_OVER_REJECTION) 	   @RemoveAttributes(__GeoJSONCreatorTemp__) }
+FACTORY_DEF {*} TeeFactory    FACTORY_NAME { Creator_Cloner }    INPUT FEATURE_TYPE _____CREATED______        @Tcl2(Creator_CoordSysRemover)        @CoordSys()    NUMBER_OF_COPIES { 1 }    COPY_NUMBER_ATTRIBUTE { "_creation_instance" }    OUTPUT { FEATURE_TYPE Creator_CREATED        fme_feature_type Creator         }
+FACTORY_DEF * BranchingFactory   FACTORY_NAME "Creator_CREATED Brancher -1 10"   INPUT FEATURE_TYPE Creator_CREATED   TARGET_FACTORY "$(WB_CURRENT_CONTEXT)_CREATOR_BRANCH_TARGET"   MAXIMUM_COUNT None   OUTPUT PASSED FEATURE_TYPE *
+# -------------------------------------------------------------------------
+FACTORY_DEF * TeeFactory   FACTORY_NAME "$(WB_CURRENT_CONTEXT)_CREATOR_BRANCH_TARGET"   INPUT FEATURE_TYPE *  OUTPUT FEATURE_TYPE *
+# -------------------------------------------------------------------------
+DEFAULT_MACRO DateTimeStamper_EXPRESSION
+INCLUDE [    set expression {<at>DateTimeCast<openparen><at>DateTimeNow<openparen>utc<closeparen><comma>datetime<closeparen>};    if { {NO} eq {NO} } {        set expression <at>TimeZoneRemove<openparen>$expression<closeparen>;    };    if { {NO} eq {NO} } {        set expression <at>DateTimeRound<openparen>$expression<comma>down<comma>seconds<comma>1<closeparen>;    };    puts "MACRO DateTimeStamper_EXPRESSION $expression"; ]
+FACTORY_DEF {*} TeeFactory    FACTORY_NAME { DateTimeStamper }    INPUT  FEATURE_TYPE Creator_CREATED    OUTPUT { FEATURE_TYPE DateTimeStamper_OUTPUT       @EvaluateExpression(ATTR_CREATE_EXPR_PROPAGATE_MISSING_FDIV, _timestamp, $(DateTimeStamper_EXPRESSION), DateTimeStamper)        }
+# -------------------------------------------------------------------------
+DEFAULT_MACRO START_DATETIME
+DEFAULT_MACRO END_DATETIME
+DEFAULT_MACRO OPERATOR
+DEFAULT_MACRO YEARS
+DEFAULT_MACRO MONTHS
+DEFAULT_MACRO DAYS
+DEFAULT_MACRO HOURS
+DEFAULT_MACRO MINUTES
+DEFAULT_MACRO SECONDS
+DEFAULT_MACRO ISO_INTERVAL
+DEFAULT_MACRO EXPRESSION
+DEFAULT_MACRO RESULT_TYPE
+DEFAULT_MACRO RESULT_INTERVAL
+DEFAULT_MACRO RESULT_DATETIME
+DEFAULT_MACRO RESULT
+DEFAULT_MACRO DateTimeCalculator_EXPRESSION expression
+DEFAULT_MACRO DateTimeCalculator_RESULT_ATTR attr
+INCLUDE [    proc stripEvaluateExpression {val} {       if {[regexp {@EvaluateExpression\([^)]*STRING_ENCODED,([^,]*),.+\)} $val -> unwrapped] && [string first {FME_CONDITIONAL:} $unwrapped] < 0}  {          return $unwrapped       } else {          return $val       };    }; ]
+INCLUDE [    set start_datetime_stripped [stripEvaluateExpression {@EvaluateExpression(FDIV,STRING_ENCODED,<at>Value<openparen>_timestamp<closeparen>,DateTimeCalculator)}];    set end_datetime_stripped [stripEvaluateExpression {$(END_DATETIME)}];    set years_stripped [stripEvaluateExpression {0}];    set months_stripped [stripEvaluateExpression {0}];    set days_stripped [stripEvaluateExpression {0}];    set hours_stripped [stripEvaluateExpression {9}];    set minutes_stripped [stripEvaluateExpression {0}];    set seconds_stripped [stripEvaluateExpression {0}];    set iso_interval_stripped [stripEvaluateExpression {$(ISO_INTERVAL)}];    set result_type_stripped [stripEvaluateExpression {$(RESULT_TYPE)}];    set expression {};    set result_attr {};    if { "DATETIMECALC_1_ADD_INTERVAL" eq "DATETIMECALC_1_ADD_INTERVAL" ||         "DATETIMECALC_1_ADD_INTERVAL" eq "DATETIMECALC_2_ADD_ISO_INTERVAL" } {       set interval $iso_interval_stripped;       if { "DATETIMECALC_1_ADD_INTERVAL" eq "DATETIMECALC_1_ADD_INTERVAL" } {          set interval <at>DateTimeIntervalCreate<openparen><quote>$years_stripped<quote><comma><quote>$months_stripped<quote><comma><quote>$days_stripped<quote><comma><quote>$hours_stripped<quote><comma><quote>$minutes_stripped<quote><comma><quote>$seconds_stripped<quote><closeparen>;       };       set signed_interval $interval;       if { "ADD" eq "SUBTRACT" } {          set signed_interval <at>DateTimeIntervalNegate<openparen><quote>$interval<quote><closeparen>;       };       set result_attr {_timestamp};       set expression <at>DateTimeAdd<openparen><quote>$start_datetime_stripped<quote><comma><quote>$signed_interval<quote><closeparen>;    } elseif { "DATETIMECALC_1_ADD_INTERVAL" eq "DATETIMECALC_3_CALCULATE_INTERVAL" } {       set result_attr {$(RESULT_INTERVAL)};       set expression <at>DateTimeDiff<openparen><quote>$end_datetime_stripped<quote><comma><quote>$start_datetime_stripped<quote><comma><quote>$result_type_stripped<quote><closeparen>;    } elseif { "DATETIMECALC_1_ADD_INTERVAL" eq "DATETIMECALC_4_EXPRESSION" } {       set result_attr {$(RESULT)};       set expression {$(EXPRESSION)};    };    puts "MACRO DateTimeCalculator_EXPRESSION $expression";    puts "MACRO DateTimeCalculator_RESULT_ATTR $result_attr"; ]
+FACTORY_DEF {*} TeeFactory    FACTORY_NAME { DateTimeCalculator_1 }    INPUT  FEATURE_TYPE DateTimeStamper_OUTPUT    OUTPUT { FEATURE_TYPE __TEST_NULL__       @EvaluateExpression(ATTR_CREATE_EXPR_PROPAGATE_MISSING_FDIV,$(DateTimeCalculator_RESULT_ATTR),"$(DateTimeCalculator_EXPRESSION)",DateTimeCalculator) }
+FACTORY_DEF {*} TestFactory    FACTORY_NAME { DateTimeCalculator_2 }    INPUT FEATURE_TYPE __TEST_NULL__    TEST { "$(DateTimeCalculator_RESULT_ATTR)" ATTRIBUTE_VALUE_NULL "" ENCODED }    PRESERVE_FEATURE_ORDER PER_OUTPUT_PORT    OUTPUT { PASSED FEATURE_TYPE DateTimeCalculator_<REJECTED>       fme_rejection_code "INVALID_INPUT"       @RemoveAttributes("$(DateTimeCalculator_RESULT_ATTR)")        }    OUTPUT { FAILED FEATURE_TYPE DateTimeCalculator_OUTPUT        }
+DEFAULT_MACRO _WB_BYPASS_TERMINATION No
+FACTORY_DEF * TeeFactory FACTORY_NAME DateTimeCalculator_<Rejected> INPUT FEATURE_TYPE DateTimeCalculator_<REJECTED>  NO_LOGGING   OUTPUT FAILED FEATURE_TYPE * @Abort(ENCODED, DateTimeCalculator<space>output<space>a<space><lt>Rejected<gt><space>feature.<space><space>To<space>continue<space>translation<space>when<space>features<space>are<space>rejected<comma><space>change<space><apos>Workspace<space>Parameters<apos><space><gt><space>Translation<space><gt><space><apos>Rejected<space>Feature<space>Handling<apos><space>to<space><apos>Continue<space>Translation<apos>)
+# -------------------------------------------------------------------------
+FACTORY_DEF {*} DateTimeConverterFactory    FACTORY_NAME { DateTimeConverter }    DATETIME_ATTR { "_timestamp" }    IN_FORMAT { "" }    OUT_FORMAT { "ISO" }    REPAIR_INPUT { "YES" }    PASSTHROUGH { "NO" }    INPUT  FEATURE_TYPE DateTimeCalculator_OUTPUT    OUTPUT { OUTPUT FEATURE_TYPE DateTimeConverter_OUTPUT        }    OUTPUT { REJECTED FEATURE_TYPE DateTimeConverter_<REJECTED>        }
+DEFAULT_MACRO _WB_BYPASS_TERMINATION No
+FACTORY_DEF * TeeFactory FACTORY_NAME DateTimeConverter_<Rejected> INPUT FEATURE_TYPE DateTimeConverter_<REJECTED>  NO_LOGGING   OUTPUT FAILED FEATURE_TYPE * @Abort(ENCODED, DateTimeConverter<space>output<space>a<space><lt>Rejected<gt><space>feature.<space><space>To<space>continue<space>translation<space>when<space>features<space>are<space>rejected<comma><space>change<space><apos>Workspace<space>Parameters<apos><space><gt><space>Translation<space><gt><space><apos>Rejected<space>Feature<space>Handling<apos><space>to<space><apos>Continue<space>Translation<apos>)
+# -------------------------------------------------------------------------
+Tcl2 proc ParameterFetcher_doFetch {} {    foreach {name val} {"_REQUEST_MESSAGE_JSON {$(REQUEST_MESSAGE_JSON)} _SUCCESS_MESSAGE_JSON {$(SUCCESS_MESSAGE_JSON)}"} {         if { [string match {*<at>*} $val] == 1 } {             set val [FME_Execute EvaluateExpression {STRING} $val {ParameterFetcher}];         } elseif {[string match {*FME_CONDITIONAL*} $val] == 1} {             set val [FME_Execute EvaluateExpression {STRING} $val {ParameterFetcher}];         } else {             set val [FME_DecodeTextOrAttr $val];         };       FME_SetAttribute [FME_DecodeText $name] $val    } }
+FACTORY_DEF {*} TeeFactory    FACTORY_NAME { ParameterFetcher }    INPUT  FEATURE_TYPE DateTimeConverter_OUTPUT    OUTPUT { FEATURE_TYPE ParameterFetcher_OUTPUT         @Tcl2(ParameterFetcher_doFetch)          }
+# -------------------------------------------------------------------------
+FACTORY_DEF {*} TestFactory    FACTORY_NAME { Tester }    INPUT  FEATURE_TYPE ParameterFetcher_OUTPUT    TEST { _SUCCESS_MESSAGE_JSON ATTRIBUTE_HAS_A_VALUE "" ENCODED }    BOOLEAN_OPERATOR { OR }    COMPOSITE_TEST_EXPR { "<Unused>" }    PRESERVE_FEATURE_ORDER { PER_OUTPUT_PORT }    OUTPUT { PASSED FEATURE_TYPE Tester_PASSED         }
+# -------------------------------------------------------------------------
+FACTORY_DEF {*} XMLTemplaterFactory FACTORY_NAME { JSONTemplater } INPUT CONTROL_FEATURE FEATURE_TYPE Tester_PASSED INPUT DATA_FEATURE FEATURE_TYPE JSONTemplater_DataFeatures RESULT_ATTR { "result" } OUTPUT_XML_HEADER NO BUCKET_ATTR_NAME __xml_templater_bucket__ CONTROL_TEMPLATE_EXPR { <opencurly>|<lf><space><space><space><space>fme:get-json-attribute<openparen><quote>_REQUEST_MESSAGE_JSON<quote><closeparen><comma><lf><space><space><space><space>fme:get-json-attribute<openparen><quote>_SUCCESS_MESSAGE_JSON<quote><closeparen><comma><lf><space><space><space><space><opencurly><quote>update_datetime<quote>:fme:get-attribute<openparen><quote>_timestamp<quote><closeparen><closecurly><lf>|<closecurly> } OUTPUT XML_DOCUMENT FEATURE_TYPE JSONTemplater_OUTPUT
+# -------------------------------------------------------------------------
+FACTORY_DEF {*} JSONQueryFactory    FACTORY_NAME { JSONExtractor }    INPUT  FEATURE_TYPE JSONTemplater_OUTPUT    MODE EXTRACT    JSON_DOCUMENT { "@EvaluateExpression(FDIV,STRING_ENCODED,<at>Value<openparen>result<closeparen>,JSONExtractor)" }    READ_FROM_FILE { NO }    FILEPATH_OR_URL { "<Unused>" }    QUERIES { uuid json<openbracket><quote>request_id<quote><closebracket> }    OUTPUT { EVALUATED FEATURE_TYPE JSONExtractor_EVALUATED        }    OUTPUT { REJECTED FEATURE_TYPE JSONExtractor_<REJECTED>        }
+DEFAULT_MACRO _WB_BYPASS_TERMINATION No
+FACTORY_DEF * TeeFactory FACTORY_NAME JSONExtractor_<Rejected> INPUT FEATURE_TYPE JSONExtractor_<REJECTED>  NO_LOGGING   OUTPUT FAILED FEATURE_TYPE * @Abort(ENCODED, JSONExtractor<space>output<space>a<space><lt>Rejected<gt><space>feature.<space><space>To<space>continue<space>translation<space>when<space>features<space>are<space>rejected<comma><space>change<space><apos>Workspace<space>Parameters<apos><space><gt><space>Translation<space><gt><space><apos>Rejected<space>Feature<space>Handling<apos><space>to<space><apos>Continue<space>Translation<apos>)
+# -------------------------------------------------------------------------
+FACTORY_DEF {*} AttrSetFactory    COMMAND_PARM_EVALUATION SINGLE_PASS    FACTORY_NAME { AttributeManager }    INPUT  FEATURE_TYPE JSONExtractor_EVALUATED    MULTI_FEATURE_MODE { NO }    NULL_ATTR_MODE { NO_OP }    ATTRSET_CREATE_DIRECTIVES _PROPAGATE_MISSING_FDIV    ACTION_COLUMN 4    DEF_VAL_COLUMN 2    NUM_OF_COLUMNS 5    MISSING_INPUT_ATTR_HANDLING RENAME_SET_VALUE REMOVE    ATTR_ACTION { "uuid" "uuid" "" "varchar<openparen>200<closeparen>" "NO_OP" }      ATTR_ACTION { "result" "result" "" "buffer" "NO_OP" }      ATTR_ACTION { "" "status" "done" "varchar<openparen>4<closeparen>" "SET_TO" }      ATTR_ACTION { "_creation_instance" "_creation_instance" "" "uint64" "REMOVE" }      ATTR_ACTION { "_timestamp" "created_at" "" "buffer" "RENAME_SET_VALUE" }      ATTR_ACTION { "_REQUEST_MESSAGE_JSON" "_REQUEST_MESSAGE_JSON" "" "buffer" "REMOVE" }      ATTR_ACTION { "_SUCCESS_MESSAGE_JSON" "_SUCCESS_MESSAGE_JSON" "" "buffer" "REMOVE" }    OUTPUT { OUTPUT FEATURE_TYPE AttributeManager_OUTPUT        }
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * RoutingFactory FACTORY_NAME "Destination Feature Type Routing Correlator"   COMMAND_PARM_EVALUATION SINGLE_PASS   INPUT FEATURE_TYPE *    ROUTE FME_GENERIC AttributeManager_OUTPUT TO POSTGRES __GO_TO_FINAL_OUTPUT_ROUTER__ multi_writer_id,0,<at>SupplyAttributes<openparen>ENCODED<comma>__wb_out_feat_type__<comma>echigo.relocation_status<closeparen> GEOMETRY   FEATURE_TYPE_ATTRIBUTE __wb_out_feat_type__   OUTPUT ROUTED FEATURE_TYPE *    OUTPUT NOT_ROUTED FEATURE_TYPE __nuke_me__ @Tcl2("FME_StatMessage 818059 [FME_GetAttribute fme_template_feature_type] 818060 818061 fme_warn")
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * TeeFactory   FACTORY_NAME "Final Output Nuker"   INPUT FEATURE_TYPE __nuke_me__
+
+# -------------------------------------------------------------------------
+POSTGRES_1_DEF echigo.relocation_status   postgres_type                All   postgres_sql_key_columns     ""   postgres_drop_table          ""   postgres_truncate_table      ""   postgres_mode                ""   fme_feature_operation        INSERT   fme_table_handling           CREATE_IF_MISSING   postgres_create_with_oids    NO   postgres_vacuum_analyze      NO   postgres_allow_serial_writing YES   uuid                         text   created_at                   timestamp   deleted_at                   timestamp   type                         text   url                          text   format                       text   alias                        text   name                         text   object_height                float8   object_scale                 float8   result                       text   status                       text   error                        text
